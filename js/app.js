@@ -178,33 +178,50 @@ class MenuGenerator {
         this.animateSlotMachine(candidates, mode, params);
     }
 
-    // 滚动动画逻辑
+    // 滚动动画逻辑 - 使用抛物线缓动
     animateSlotMachine(candidates, mode, params) {
         const reel = document.getElementById('slot-reel');
         const progressBar = document.getElementById('loading-progress');
         
         // 创建扩展的候选列表（包含重复项以实现循环效果）
         const extendedCandidates = [];
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 15; i++) {
             extendedCandidates.push(...candidates);
         }
-        
-        let currentIndex = 0;
-        let speed = 50; // 初始速度（毫秒）
-        let slowDownCounter = 0;
-        const totalSteps = 60; // 总滚动步数
-        let step = 0;
         
         // 最终选择的菜品
         const finalIndex = Math.floor(Math.random() * candidates.length);
         const finalDish = candidates[finalIndex];
         
+        // 动画参数
+        const totalDuration = 2500; // 总持续时间（毫秒）
+        const startTime = Date.now();
+        let currentIndex = 0;
+        
+        // 抛物线缓动函数 (easeOutQuad)
+        const easeOutQuad = (t) => {
+            return 1 - (1 - t) * (1 - t);
+        };
+        
+        // 反向抛物线缓动函数 (easeInQuad) - 用于速度计算
+        const easeInQuad = (t) => {
+            return t * t;
+        };
+        
         const animate = () => {
-            step++;
+            const currentTime = Date.now();
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / totalDuration, 1);
             
             // 更新进度条
-            const progress = (step / totalSteps) * 100;
-            progressBar.style.width = `${progress}%`;
+            progressBar.style.width = `${progress * 100}%`;
+            
+            // 使用缓动函数计算当前速度
+            // 开始时快速滚动，然后平滑减速
+            const speedProgress = easeInQuad(progress);
+            const minInterval = 30;  // 最小间隔（最快速度）
+            const maxInterval = 300; // 最大间隔（最慢速度）
+            const currentInterval = minInterval + (maxInterval - minInterval) * speedProgress;
             
             // 显示当前菜品
             const currentDish = extendedCandidates[currentIndex % extendedCandidates.length];
@@ -218,22 +235,17 @@ class MenuGenerator {
                 </div>
             `;
             
-            // 逐渐减速
-            if (step > totalSteps * 0.6) {
-                speed += 20; // 逐渐减速
-                slowDownCounter++;
-            }
-            
             currentIndex++;
             
-            if (step < totalSteps) {
-                setTimeout(animate, speed);
+            if (progress < 1) {
+                // 根据当前速度设置下一次动画的延迟
+                setTimeout(animate, currentInterval);
             } else {
                 // 滚动结束，显示最终结果
                 setTimeout(() => {
                     this.displayFinalResult(finalDish, mode, params);
                     this.showMessage(`🎰 滚动完成! 推荐: ${finalDish.name}`, 'success');
-                }, 500);
+                }, 200);
             }
         };
         

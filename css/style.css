@@ -1396,4 +1396,255 @@ body {
     .slot-machine {
         padding: 15px;
     }
+}/* 优化的滚动老虎机
+样式 */
+.slot-machine {
+    background: #1e1e1e;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.slot-header {
+    margin-bottom: 20px;
+}
+
+.slot-title {
+    font-size: 1.5rem;
+    color: #00ff00;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.slot-counter {
+    color: #00cccc;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.slot-display {
+    background: #2c2c2c;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.slot-reel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slot-item {
+    width: 100%;
+    padding: 10px;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slot-item.current {
+    transform: scale(1.05);
+    filter: brightness(1.3) drop-shadow(0 0 8px rgba(0, 255, 0, 0.6));
+}
+
+.dish-name-slot {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00ff00;
+    margin-bottom: 8px;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.dish-info-slot {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 0.9rem;
+}
+
+.ingredients-slot {
+    color: #00cccc;
+    opacity: 0.9;
+}
+
+.difficulty-slot {
+    color: #ffcc00;
+    text-shadow: 0 0 4px rgba(255, 204, 0, 0.5);
+}
+
+.slot-footer {
+    margin-top: 20px;
+}
+
+.loading-bar {
+    background: #2c2c2c;
+    border: 1px solid #00ff00;
+    border-radius: 10px;
+    height: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.loading-progress {
+    background: linear-gradient(90deg, #00ff00, #00cccc, #00ff00);
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: shimmer 1.5s infinite;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.slot-status {
+    color: #00cccc;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    animation: blink 1.5s infinite;
+}
+
+/* 最终结果优化样式 */
+.final-result {
+    animation: finalReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.winner-badge {
+    background: linear-gradient(45deg, #00ff00, #00cccc);
+    color: #1e1e1e;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: bounce 0.6s ease-out;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+}
+
+/* 改进的动画效果 */
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scale(1.02);
+    }
+}
+
+@keyframes shimmer {
+    0% { 
+        background-position: -200px 0; 
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+    }
+    100% { 
+        background-position: 200px 0; 
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+}
+
+@keyframes finalReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotateY(90deg);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05) rotateY(45deg);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* 滚动时的扫描线效果优化 */
+.slot-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 255, 0, 0.1), 
+        rgba(0, 255, 0, 0.2), 
+        rgba(0, 255, 0, 0.1), 
+        transparent
+    );
+    animation: scan 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .slot-display {
+        height: 100px;
+    }
+    
+    .dish-name-slot {
+        font-size: 1.4rem;
+    }
+    
+    .dish-info-slot {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .slot-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slot-display {
+        height: 80px;
+    }
+    
+    .dish-name-slot {
+        font-size: 1.2rem;
+    }
+    
+    .slot-machine {
+        padding: 15px;
+    }
 }
