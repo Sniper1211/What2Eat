@@ -52,17 +52,14 @@ class MenuGenerator {
         document.getElementById('close-list-btn').addEventListener('click', () => this.hideDishList());
     }
 
-    // 随机推荐
+    // 随机推荐 - 添加滚动效果
     randomRecommend() {
         if (this.dishes.length === 0) {
             this.showMessage('ERROR: 菜单为空', 'error');
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * this.dishes.length);
-        const dish = this.dishes[randomIndex];
-        this.displayResult(dish, 'random');
-        this.showMessage(`随机推荐: ${dish.name}`, 'success');
+        this.startSlotMachine(this.dishes, 'random');
     }
 
     // 显示食材筛选
@@ -127,10 +124,7 @@ class MenuGenerator {
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * matchedDishes.length);
-        const dish = matchedDishes[randomIndex];
-        this.displayResult(dish, 'ingredient', ingredients);
-        this.showMessage(`基于食材推荐: ${dish.name}`, 'success');
+        this.startSlotMachine(matchedDishes, 'ingredient', ingredients);
     }
 
     // 指定选择推荐
@@ -152,13 +146,139 @@ class MenuGenerator {
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * availableDishes.length);
-        const dish = availableDishes[randomIndex];
-        this.displayResult(dish, 'choose', dishNames);
-        this.showMessage(`从指定菜品中选择: ${dish.name}`, 'success');
+        this.startSlotMachine(availableDishes, 'choose', dishNames);
     }
 
-    // 显示推荐结果
+    // 滚动老虎机效果
+    startSlotMachine(candidates, mode, params = []) {
+        const resultDisplay = document.getElementById('result-display');
+        
+        // 显示滚动界面
+        resultDisplay.innerHTML = `
+            <div class="slot-machine">
+                <div class="slot-header">
+                    <div class="slot-title">🎰 正在筛选中...</div>
+                    <div class="slot-counter">候选菜品: ${candidates.length} 个</div>
+                </div>
+                <div class="slot-display">
+                    <div class="slot-reel" id="slot-reel">
+                        <!-- 滚动内容将在这里生成 -->
+                    </div>
+                </div>
+                <div class="slot-footer">
+                    <div class="loading-bar">
+                        <div class="loading-progress" id="loading-progress"></div>
+                    </div>
+                    <div class="slot-status">系统正在计算最佳匹配...</div>
+                </div>
+            </div>
+        `;
+
+        // 开始滚动动画
+        this.animateSlotMachine(candidates, mode, params);
+    }
+
+    // 滚动动画逻辑
+    animateSlotMachine(candidates, mode, params) {
+        const reel = document.getElementById('slot-reel');
+        const progressBar = document.getElementById('loading-progress');
+        
+        // 创建扩展的候选列表（包含重复项以实现循环效果）
+        const extendedCandidates = [];
+        for (let i = 0; i < 20; i++) {
+            extendedCandidates.push(...candidates);
+        }
+        
+        let currentIndex = 0;
+        let speed = 50; // 初始速度（毫秒）
+        let slowDownCounter = 0;
+        const totalSteps = 60; // 总滚动步数
+        let step = 0;
+        
+        // 最终选择的菜品
+        const finalIndex = Math.floor(Math.random() * candidates.length);
+        const finalDish = candidates[finalIndex];
+        
+        const animate = () => {
+            step++;
+            
+            // 更新进度条
+            const progress = (step / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // 显示当前菜品
+            const currentDish = extendedCandidates[currentIndex % extendedCandidates.length];
+            reel.innerHTML = `
+                <div class="slot-item current">
+                    <div class="dish-name-slot">${currentDish.name}</div>
+                    <div class="dish-info-slot">
+                        <span class="ingredients-slot">${currentDish.ingredients.slice(0, 3).join(', ')}</span>
+                        <span class="difficulty-slot">${'★'.repeat(currentDish.difficulty)}</span>
+                    </div>
+                </div>
+            `;
+            
+            // 逐渐减速
+            if (step > totalSteps * 0.6) {
+                speed += 20; // 逐渐减速
+                slowDownCounter++;
+            }
+            
+            currentIndex++;
+            
+            if (step < totalSteps) {
+                setTimeout(animate, speed);
+            } else {
+                // 滚动结束，显示最终结果
+                setTimeout(() => {
+                    this.displayFinalResult(finalDish, mode, params);
+                    this.showMessage(`🎰 滚动完成! 推荐: ${finalDish.name}`, 'success');
+                }, 500);
+            }
+        };
+        
+        // 开始动画
+        animate();
+    }
+
+    // 显示最终结果
+    displayFinalResult(dish, mode, params = []) {
+        const difficultyStars = '★'.repeat(dish.difficulty) + '☆'.repeat(5 - dish.difficulty);
+        const modeText = {
+            'random': '随机推荐',
+            'ingredient': `食材筛选: ${params.join(', ')}`,
+            'choose': `指定选择: ${params.join(', ')}`
+        };
+
+        document.getElementById('result-display').innerHTML = `
+            <div class="dish-result final-result">
+                <div class="result-header">
+                    <div class="winner-badge">🏆 推荐结果</div>
+                    <h2 class="dish-name">${dish.name}</h2>
+                    <div class="mode-info"># ${modeText[mode]}</div>
+                </div>
+                <div class="dish-info">
+                    <div class="info-item">
+                        <span class="label">食材:</span>
+                        <span class="value">[${dish.ingredients.join(', ')}]</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">难度:</span>
+                        <span class="value">${difficultyStars} (${dish.difficulty}/5)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">时间:</span>
+                        <span class="value">${dish.time} 分钟</span>
+                    </div>
+                </div>
+                <div class="result-footer">
+                    <small>推荐时间: ${new Date().toLocaleString()}</small>
+                </div>
+            </div>
+        `;
+    }
+
+    // 显示推荐结果（保留原方法作为备用）
     displayResult(dish, mode, params = []) {
         const difficultyStars = '★'.repeat(dish.difficulty) + '☆'.repeat(5 - dish.difficulty);
         const modeText = {
