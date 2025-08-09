@@ -1,0 +1,56 @@
+{
+  "dishes": [
+    {
+      "id": "1",
+      "name": "番茄鸡蛋",
+      "ingredients": ["番茄", "鸡蛋", "葱", "盐", "糖"],
+      "difficulty": 1,
+      "timeMinutes": 15,
+      "tags": ["家常菜", "简单", "下饭"],
+      "createdAt": "2024-01-01T12:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "红烧肉",
+      "ingredients": ["五花肉", "生抽", "老抽", "冰糖", "料酒", "葱", "姜"],
+      "difficulty": 4,
+      "timeMinutes": 90,
+      "tags": ["荤菜", "费时", "下饭"],
+      "createdAt": "2024-01-01T12:30:00.000Z"
+    },
+    {
+      "id": "3",
+      "name": "青椒土豆丝",
+      "ingredients": ["土豆", "青椒", "蒜", "醋", "盐"],
+      "difficulty": 2,
+      "timeMinutes": 20,
+      "tags": ["素菜", "爽脆", "下饭"],
+      "createdAt": "2024-01-01T13:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "宫保鸡丁",
+      "ingredients": ["鸡胸肉", "花生米", "干辣椒", "花椒", "葱", "姜", "蒜"],
+      "difficulty": 3,
+      "timeMinutes": 30,
+      "tags": ["川菜", "下饭", "香辣"],
+      "createdAt": "2024-01-01T13:30:00.000Z"
+    },
+    {
+      "id": "5",
+      "name": "蒸蛋羹",
+      "ingredients": ["鸡蛋", "温水", "盐", "香油", "葱花"],
+      "difficulty": 1,
+      "timeMinutes": 25,
+      "tags": ["简单", "嫩滑", "营养"],
+      "createdAt": "2024-01-01T14:00:00.000Z"
+    }
+  ],
+  "settings": {
+    "defaultDifficulty": 3,
+    "maxRecommendations": 5,
+    "theme": "light"
+  },
+  "version": "1.0",
+  "lastUpdated": "2024-01-01T14:00:00.000Z"
+}
