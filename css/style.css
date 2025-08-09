@@ -1647,4 +1647,79 @@ body {
     .slot-machine {
         padding: 15px;
     }
+}/*
+ Toast 消息提示样式 */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 2px solid;
+    z-index: 1001;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+.toast.success {
+    background: #1e1e1e;
+    color: #00ff00;
+    border-color: #00ff00;
+    box-shadow: 0 4px 12px rgba(0, 255, 0, 0.2);
+}
+
+.toast.error {
+    background: #1e1e1e;
+    color: #ff6666;
+    border-color: #ff6666;
+    box-shadow: 0 4px 12px rgba(255, 102, 102, 0.2);
+}
+
+.toast.warning {
+    background: #1e1e1e;
+    color: #ffcc00;
+    border-color: #ffcc00;
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.2);
+}
+
+.toast.info {
+    background: #1e1e1e;
+    color: #00cccc;
+    border-color: #00cccc;
+    box-shadow: 0 4px 12px rgba(0, 204, 204, 0.2);
+}
+
+/* Toast 显示状态 */
+.toast:not(.hidden) {
+    transform: translateX(0);
+}
+
+/* Toast 响应式设计 */
+@media (max-width: 768px) {
+    .toast {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        transform: translateY(-100%);
+    }
+    
+    .toast:not(.hidden) {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .toast {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
 }

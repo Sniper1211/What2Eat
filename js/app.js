@@ -456,11 +456,20 @@ class MenuGenerator {
         const toast = document.getElementById('toast');
         const messageEl = document.getElementById('toast-message');
         
+        // 清除之前的定时器
+        if (this.toastTimer) {
+            clearTimeout(this.toastTimer);
+        }
+        
+        // 设置消息内容和样式
         messageEl.textContent = message;
         toast.className = `toast ${type}`;
+        
+        // 显示toast
         toast.classList.remove('hidden');
         
-        setTimeout(() => {
+        // 设置自动隐藏
+        this.toastTimer = setTimeout(() => {
             toast.classList.add('hidden');
         }, 3000);
     }
