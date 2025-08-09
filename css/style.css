@@ -1429,45 +1429,92 @@ body {
 }
 
 .slot-display {
-    background: #2c2c2c;
-    border: 2px solid #00ff00;
-    border-radius: 8px;
-    height: 120px;
+    background: linear-gradient(145deg, #1a1a1a, #2c2c2c);
+    border: 3px solid #00ff00;
+    border-radius: 12px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0;
+    margin: 25px 0;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.1);
+    box-shadow: 
+        inset 0 0 30px rgba(0, 255, 0, 0.1),
+        0 0 25px rgba(0, 255, 0, 0.2);
 }
 
 .slot-reel {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .slot-item {
     width: 100%;
-    padding: 10px;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px 15px;
+    text-align: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+/* 前一个菜品 - 上方，小字号，半透明 */
+.slot-item.prev {
+    top: 10px;
+    opacity: 0.4;
+    transform: scale(0.7) translateY(-10px);
+    filter: blur(1px);
+}
+
+/* 当前菜品 - 中央，正常大小，高亮 */
 .slot-item.current {
-    transform: scale(1.05);
-    filter: brightness(1.3) drop-shadow(0 0 8px rgba(0, 255, 0, 0.6));
+    top: 50%;
+    transform: translateY(-50%) scale(1.1);
+    opacity: 1;
+    filter: brightness(1.3) drop-shadow(0 0 12px rgba(0, 255, 0, 0.8));
+    z-index: 10;
+}
+
+/* 下一个菜品 - 下方，小字号，半透明 */
+.slot-item.next {
+    bottom: 10px;
+    opacity: 0.4;
+    transform: scale(0.7) translateY(10px);
+    filter: blur(1px);
 }
 
 .dish-name-slot {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #00ff00;
-    margin-bottom: 8px;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+    margin-bottom: 6px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
     letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* 当前菜品的菜名更大 */
+.slot-item.current .dish-name-slot {
+    font-size: 2rem;
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+/* 前后菜品的菜名更小 */
+.slot-item.prev .dish-name-slot,
+.slot-item.next .dish-name-slot {
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
 }
 
 .dish-info-slot {
@@ -1721,5 +1768,215 @@ body {
     .toast {
         font-size: 0.8rem;
         padding: 10px 15px;
+    }
+}/* 美化的滚
+动老虎机样式 */
+.slot-machine {
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border: 3px solid #00ff00;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 0, 0.4),
+        inset 0 0 20px rgba(0, 255, 0, 0.05);
+}
+
+.slot-header {
+    margin-bottom: 25px;
+}
+
+.slot-title {
+    font-size: 1.8rem;
+    color: #00ff00;
+    font-weight: bold;
+    margin-bottom: 12px;
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.slot-counter {
+    color: #00cccc;
+    font-size: 1rem;
+    opacity: 0.9;
+    background: rgba(0, 204, 204, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgba(0, 204, 204, 0.3);
+}
+
+.slot-footer {
+    margin-top: 25px;
+}
+
+.loading-bar {
+    background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
+    border: 2px solid #00ff00;
+    border-radius: 15px;
+    height: 12px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.loading-progress {
+    background: linear-gradient(90deg, 
+        #00ff00, 
+        #00cccc, 
+        #00ff00, 
+        #ffcc00, 
+        #00ff00
+    );
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: shimmer 1.5s infinite;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+    border-radius: 10px;
+}
+
+.slot-status {
+    color: #00cccc;
+    font-size: 1rem;
+    opacity: 0.9;
+    animation: blink 1.5s infinite;
+    background: rgba(0, 204, 204, 0.05);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 204, 204, 0.2);
+}
+
+/* 改进的扫描线效果 */
+.slot-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 255, 0, 0.05), 
+        rgba(0, 255, 0, 0.15), 
+        rgba(0, 255, 0, 0.25), 
+        rgba(0, 255, 0, 0.15), 
+        rgba(0, 255, 0, 0.05), 
+        transparent
+    );
+    animation: scan 2.5s infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.slot-display::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(0deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+    background-size: 100% 4px, 4px 100%;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* 改进的动画效果 */
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+        text-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scale(1.03);
+        text-shadow: 0 0 25px rgba(0, 255, 0, 0.8);
+    }
+}
+
+@keyframes shimmer {
+    0% { 
+        background-position: -300px 0; 
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(0, 255, 0, 0.8);
+    }
+    100% { 
+        background-position: 300px 0; 
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    }
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.6; }
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .slot-machine {
+        padding: 20px;
+    }
+    
+    .slot-display {
+        height: 150px;
+        margin: 20px 0;
+    }
+    
+    .slot-title {
+        font-size: 1.4rem;
+    }
+    
+    .slot-item.current .dish-name-slot {
+        font-size: 1.6rem;
+    }
+    
+    .slot-item.prev .dish-name-slot,
+    .slot-item.next .dish-name-slot {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slot-machine {
+        padding: 15px;
+    }
+    
+    .slot-display {
+        height: 120px;
+        margin: 15px 0;
+    }
+    
+    .slot-title {
+        font-size: 1.2rem;
+    }
+    
+    .slot-item.current .dish-name-slot {
+        font-size: 1.4rem;
+    }
+    
+    .slot-item.prev .dish-name-slot,
+    .slot-item.next .dish-name-slot {
+        font-size: 0.9rem;
+    }
+    
+    .slot-counter,
+    .slot-status {
+        font-size: 0.9rem;
+        padding: 6px 12px;
     }
 }
