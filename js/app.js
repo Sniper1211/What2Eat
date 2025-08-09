@@ -15,6 +15,7 @@ class MenuGenerator {
     // 加载默认菜品
     loadDefaultDishes() {
         this.dishes = [
+            // 经典家常菜
             { name: '番茄鸡蛋', ingredients: ['番茄', '鸡蛋', '葱'], difficulty: 1, time: 15 },
             { name: '红烧肉', ingredients: ['五花肉', '生抽', '老抽', '冰糖'], difficulty: 4, time: 90 },
             { name: '青椒土豆丝', ingredients: ['土豆', '青椒', '蒜'], difficulty: 2, time: 20 },
@@ -24,7 +25,37 @@ class MenuGenerator {
             { name: '糖醋里脊', ingredients: ['里脊肉', '醋', '糖', '番茄酱'], difficulty: 3, time: 35 },
             { name: '白菜炖豆腐', ingredients: ['白菜', '豆腐', '粉条'], difficulty: 2, time: 30 },
             { name: '可乐鸡翅', ingredients: ['鸡翅', '可乐', '生抽'], difficulty: 2, time: 40 },
-            { name: '蚂蚁上树', ingredients: ['粉条', '肉末', '豆瓣酱'], difficulty: 3, time: 25 }
+            { name: '蚂蚁上树', ingredients: ['粉条', '肉末', '豆瓣酱'], difficulty: 3, time: 25 },
+            
+            // 素菜系列
+            { name: '地三鲜', ingredients: ['茄子', '土豆', '青椒', '蒜'], difficulty: 2, time: 25 },
+            { name: '干煸豆角', ingredients: ['豆角', '肉末', '干辣椒', '花椒'], difficulty: 2, time: 20 },
+            { name: '醋溜白菜', ingredients: ['白菜', '醋', '干辣椒', '花椒'], difficulty: 1, time: 15 },
+            { name: '凉拌黄瓜', ingredients: ['黄瓜', '蒜', '醋', '香油'], difficulty: 1, time: 10 },
+            { name: '韭菜炒蛋', ingredients: ['韭菜', '鸡蛋', '盐'], difficulty: 1, time: 12 },
+            
+            // 肉菜系列
+            { name: '回锅肉', ingredients: ['五花肉', '豆瓣酱', '青椒', '蒜苗'], difficulty: 3, time: 35 },
+            { name: '鱼香肉丝', ingredients: ['里脊肉', '木耳', '胡萝卜', '豆瓣酱'], difficulty: 3, time: 30 },
+            { name: '红烧排骨', ingredients: ['排骨', '生抽', '老抽', '冰糖'], difficulty: 3, time: 60 },
+            { name: '水煮肉片', ingredients: ['里脊肉', '白菜', '豆瓣酱', '花椒'], difficulty: 4, time: 40 },
+            { name: '口水鸡', ingredients: ['鸡腿', '花椒', '辣椒油', '蒜泥'], difficulty: 3, time: 45 },
+            
+            // 汤品系列
+            { name: '西红柿蛋花汤', ingredients: ['番茄', '鸡蛋', '葱花'], difficulty: 1, time: 15 },
+            { name: '冬瓜排骨汤', ingredients: ['冬瓜', '排骨', '姜'], difficulty: 2, time: 80 },
+            { name: '紫菜蛋花汤', ingredients: ['紫菜', '鸡蛋', '香油'], difficulty: 1, time: 10 },
+            
+            // 面食系列
+            { name: '西红柿鸡蛋面', ingredients: ['面条', '番茄', '鸡蛋'], difficulty: 2, time: 20 },
+            { name: '炸酱面', ingredients: ['面条', '肉末', '甜面酱', '黄瓜'], difficulty: 3, time: 30 },
+            { name: '蛋炒饭', ingredients: ['米饭', '鸡蛋', '胡萝卜', '豌豆'], difficulty: 2, time: 15 },
+            
+            // 特色菜
+            { name: '麻辣香锅', ingredients: ['土豆', '豆腐', '肉片', '麻辣料'], difficulty: 4, time: 45 },
+            { name: '水煮鱼', ingredients: ['鱼片', '豆芽', '豆瓣酱', '花椒'], difficulty: 5, time: 50 },
+            { name: '毛血旺', ingredients: ['鸭血', '豆腐', '豆芽', '辣椒'], difficulty: 4, time: 40 },
+            { name: '酸菜鱼', ingredients: ['鱼片', '酸菜', '豆腐', '粉条'], difficulty: 4, time: 45 }
         ];
     }
 
