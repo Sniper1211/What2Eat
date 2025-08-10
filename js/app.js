@@ -226,7 +226,6 @@ class MenuGenerator {
         // 动画参数 - 增加滚动时长
         const totalDuration = 4000; // 总持续时间（毫秒）- 从2.5秒增加到4秒
         const startTime = Date.now();
-        let currentIndex = 0;
 
         // 抛物线缓动函数 (easeOutQuad)
         const easeOutQuad = (t) => {
@@ -242,56 +241,69 @@ class MenuGenerator {
         let scrollPosition = 0;
         let totalScrollDistance = 0;
         const itemHeight = 60; // 每个菜品项的高度
-        const targetScrollDistance = itemHeight * 50; // 目标滚动距离
         
+        // 计算目标滚动距离，确保最终停在finalDish上
+        const baseScrollDistance = itemHeight * 40; // 基础滚动距离
+        const finalOffset = finalIndex * itemHeight; // 最终菜品的偏移
+        const targetScrollDistance = baseScrollDistance + finalOffset;
+
         const animate = () => {
             const currentTime = Date.now();
             const elapsed = currentTime - startTime;
             const timeProgress = Math.min(elapsed / totalDuration, 1);
 
-            // 使用缓动函数计算滚动速度 - 调整参数适配更长时间
+            // 使用缓动函数计算滚动速度 - 增加最大速度
             const speedProgress = easeInQuad(timeProgress);
-            const minSpeed = 0.3;  // 最小滚动速度 - 更慢的结束速度
-            const maxSpeed = 6;    // 最大滚动速度 - 适中的起始速度
+            const minSpeed = 0.2;  // 最小滚动速度 - 更慢的结束速度
+            const maxSpeed = 12;   // 最大滚动速度 - 大幅增加，更震撼的视觉效果
             const currentSpeed = maxSpeed - (maxSpeed - minSpeed) * speedProgress;
-            
+
             // 累计滚动距离
             totalScrollDistance += currentSpeed;
-            
+
             // 抛物线进度条：起步猛+中间快+结尾缓
             // 使用easeOutQuad实现抛物线效果
             const parabolicProgress = easeOutQuad(timeProgress);
-            
+
             // 进一步调整曲线，让起步更猛，结尾更缓
-            const enhancedProgress = timeProgress < 0.1 
+            const enhancedProgress = timeProgress < 0.1
                 ? timeProgress * 3  // 前10%时间，进度条快速到30%
                 : 0.3 + (parabolicProgress - 0.3) * 0.7 / 0.7; // 后90%时间，剩余70%进度用抛物线
-            
+
             progressBar.style.width = `${Math.min(enhancedProgress, 1) * 100}%`;
-            
+
             // 当速度足够慢或时间到了就结束
             const shouldEnd = currentSpeed <= minSpeed * 1.1 || timeProgress >= 1;
-            
+
             // 更新滚动位置
             scrollPosition += currentSpeed;
-            
+
             // 创建连续滚动的菜品列表
             const containerHeight = 180;
             const visibleItems = Math.ceil(containerHeight / itemHeight) + 2;
-            
+
             let itemsHTML = '';
             for (let i = 0; i < visibleItems; i++) {
                 const itemIndex = Math.floor(scrollPosition / itemHeight) + i;
-                const dish = extendedCandidates[itemIndex % extendedCandidates.length];
                 
+                // 如果接近结束，确保显示正确的最终菜品
+                let dish;
+                if (shouldEnd && i === Math.floor(visibleItems / 2)) {
+                    // 滚动结束时，中心位置显示最终选择的菜品
+                    dish = finalDish;
+                } else {
+                    // 正常滚动时，从候选列表中循环选择
+                    dish = candidates[itemIndex % candidates.length];
+                }
+
                 // 计算每个菜品的垂直位置
                 const itemPosition = (i * itemHeight) - (scrollPosition % itemHeight);
                 const centerPosition = containerHeight / 2;
-                const distanceFromCenter = Math.abs(itemPosition + itemHeight/2 - centerPosition);
-                
+                const distanceFromCenter = Math.abs(itemPosition + itemHeight / 2 - centerPosition);
+
                 // 根据距离中心的位置确定样式
                 let opacity, scale, blur;
-                if (distanceFromCenter < itemHeight/2) {
+                if (distanceFromCenter < itemHeight / 2) {
                     // 中心菜品
                     opacity = 1;
                     scale = 1.05;
@@ -307,7 +319,7 @@ class MenuGenerator {
                     scale = 0.8;
                     blur = 1;
                 }
-                
+
                 itemsHTML += `
                     <div class="slot-item-flowing" style="
                         position: absolute;
@@ -327,7 +339,7 @@ class MenuGenerator {
                     </div>
                 `;
             }
-            
+
             reel.innerHTML = itemsHTML;
 
             if (!shouldEnd) {
