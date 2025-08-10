@@ -348,29 +348,29 @@ body {
     right: 0;
 }
 
-/* 前一个菜品 - 上方，小字号，半透明 */
+/* 前一个菜品 - 上方，适中字号，半透明 */
 .slot-item.prev {
-    top: 20px;
-    opacity: 0.25;
-    transform: scale(0.7) translateY(-5px);
-    filter: blur(2px);
+    top: 25px;
+    opacity: 0.5;
+    transform: scale(0.85) translateY(-3px);
+    filter: blur(0.5px);
 }
 
-/* 当前菜品 - 中央，正常大小，高亮 */
+/* 当前菜品 - 中央，正常大小，柔和高亮 */
 .slot-item.current {
     top: 50%;
-    transform: translateY(-50%) scale(1.15);
+    transform: translateY(-50%) scale(1.1);
     opacity: 1;
-    filter: brightness(1.3) drop-shadow(0 0 20px rgba(99, 179, 237, 0.9));
+    filter: brightness(1.1);
     z-index: 10;
 }
 
-/* 下一个菜品 - 下方，小字号，半透明 */
+/* 下一个菜品 - 下方，适中字号，半透明 */
 .slot-item.next {
-    bottom: 20px;
-    opacity: 0.25;
-    transform: scale(0.7) translateY(5px);
-    filter: blur(2px);
+    bottom: 25px;
+    opacity: 0.5;
+    transform: scale(0.85) translateY(3px);
+    filter: blur(0.5px);
 }
 
 .dish-name-slot {
@@ -386,26 +386,26 @@ body {
     padding: 0 var(--spacing-md);
 }
 
-/* 当前菜品的菜名更大更亮 */
+/* 当前菜品的菜名 - 柔和高亮 */
 .slot-item.current .dish-name-slot {
-    font-size: 2.4rem;
-    font-weight: 800;
+    font-size: 2.2rem;
+    font-weight: 700;
     text-shadow: 
-        0 0 30px rgba(99, 179, 237, 1),
-        0 0 60px rgba(99, 179, 237, 0.5),
-        0 2px 4px rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-    letter-spacing: 2px;
+        0 0 15px rgba(99, 179, 237, 0.6),
+        0 0 30px rgba(99, 179, 237, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.2);
+    color: #f7fafc;
+    letter-spacing: 1.5px;
 }
 
-/* 前后菜品的菜名更小更暗 */
+/* 前后菜品的菜名 - 更清晰可见 */
 .slot-item.prev .dish-name-slot,
 .slot-item.next .dish-name-slot {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    text-shadow: 0 0 6px rgba(99, 179, 237, 0.3);
-    color: rgba(99, 179, 237, 0.7);
-    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(99, 179, 237, 0.4);
+    color: rgba(99, 179, 237, 0.8);
+    letter-spacing: 0.8px;
 }
 
 
@@ -1016,13 +1016,13 @@ body {
     }
     
     .slot-item.current .dish-name-slot {
-        font-size: 2rem;
+        font-size: 1.9rem;
         letter-spacing: 1px;
     }
     
     .slot-item.prev .dish-name-slot,
     .slot-item.next .dish-name-slot {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 }
 
@@ -1036,12 +1036,12 @@ body {
     }
     
     .slot-item.current .dish-name-slot {
-        font-size: 1.8rem;
-        letter-spacing: 0.5px;
+        font-size: 1.7rem;
+        letter-spacing: 0.8px;
     }
     
     .slot-item.prev .dish-name-slot,
     .slot-item.next .dish-name-slot {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 }

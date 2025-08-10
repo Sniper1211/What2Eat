@@ -26,31 +26,31 @@ class MenuGenerator {
             { name: '白菜炖豆腐', ingredients: ['白菜', '豆腐', '粉条'], difficulty: 2, time: 30 },
             { name: '可乐鸡翅', ingredients: ['鸡翅', '可乐', '生抽'], difficulty: 2, time: 40 },
             { name: '蚂蚁上树', ingredients: ['粉条', '肉末', '豆瓣酱'], difficulty: 3, time: 25 },
-            
+
             // 素菜系列
             { name: '地三鲜', ingredients: ['茄子', '土豆', '青椒', '蒜'], difficulty: 2, time: 25 },
             { name: '干煸豆角', ingredients: ['豆角', '肉末', '干辣椒', '花椒'], difficulty: 2, time: 20 },
             { name: '醋溜白菜', ingredients: ['白菜', '醋', '干辣椒', '花椒'], difficulty: 1, time: 15 },
             { name: '凉拌黄瓜', ingredients: ['黄瓜', '蒜', '醋', '香油'], difficulty: 1, time: 10 },
             { name: '韭菜炒蛋', ingredients: ['韭菜', '鸡蛋', '盐'], difficulty: 1, time: 12 },
-            
+
             // 肉菜系列
             { name: '回锅肉', ingredients: ['五花肉', '豆瓣酱', '青椒', '蒜苗'], difficulty: 3, time: 35 },
             { name: '鱼香肉丝', ingredients: ['里脊肉', '木耳', '胡萝卜', '豆瓣酱'], difficulty: 3, time: 30 },
             { name: '红烧排骨', ingredients: ['排骨', '生抽', '老抽', '冰糖'], difficulty: 3, time: 60 },
             { name: '水煮肉片', ingredients: ['里脊肉', '白菜', '豆瓣酱', '花椒'], difficulty: 4, time: 40 },
             { name: '口水鸡', ingredients: ['鸡腿', '花椒', '辣椒油', '蒜泥'], difficulty: 3, time: 45 },
-            
+
             // 汤品系列
             { name: '西红柿蛋花汤', ingredients: ['番茄', '鸡蛋', '葱花'], difficulty: 1, time: 15 },
             { name: '冬瓜排骨汤', ingredients: ['冬瓜', '排骨', '姜'], difficulty: 2, time: 80 },
             { name: '紫菜蛋花汤', ingredients: ['紫菜', '鸡蛋', '香油'], difficulty: 1, time: 10 },
-            
+
             // 面食系列
             { name: '西红柿鸡蛋面', ingredients: ['面条', '番茄', '鸡蛋'], difficulty: 2, time: 20 },
             { name: '炸酱面', ingredients: ['面条', '肉末', '甜面酱', '黄瓜'], difficulty: 3, time: 30 },
             { name: '蛋炒饭', ingredients: ['米饭', '鸡蛋', '胡萝卜', '豌豆'], difficulty: 2, time: 15 },
-            
+
             // 特色菜
             { name: '麻辣香锅', ingredients: ['土豆', '豆腐', '肉片', '麻辣料'], difficulty: 4, time: 45 },
             { name: '水煮鱼', ingredients: ['鱼片', '豆芽', '豆瓣酱', '花椒'], difficulty: 5, time: 50 },
@@ -65,20 +65,20 @@ class MenuGenerator {
         document.getElementById('random-btn').addEventListener('click', () => this.randomRecommend());
         document.getElementById('ingredient-btn').addEventListener('click', () => this.showIngredientFilter());
         document.getElementById('choose-btn').addEventListener('click', () => this.showChooseFilter());
-        
+
         // 筛选面板按钮
         document.getElementById('apply-btn').addEventListener('click', () => this.applyFilter());
         document.getElementById('cancel-btn').addEventListener('click', () => this.hideFilter());
-        
+
         // 管理按钮
         document.getElementById('add-btn').addEventListener('click', () => this.showAddForm());
         document.getElementById('manage-btn').addEventListener('click', () => this.showDishList());
-        
+
         // 表单相关
         document.getElementById('dish-form').addEventListener('submit', (e) => this.addDish(e));
         document.getElementById('close-add-btn').addEventListener('click', () => this.hideAddForm());
         document.getElementById('cancel-add-btn').addEventListener('click', () => this.hideAddForm());
-        
+
         // 列表相关
         document.getElementById('close-list-btn').addEventListener('click', () => this.hideDishList());
     }
@@ -141,9 +141,9 @@ class MenuGenerator {
         }
 
         const ingredients = input.split(',').map(item => item.trim()).filter(item => item);
-        const matchedDishes = this.dishes.filter(dish => 
-            ingredients.some(ingredient => 
-                dish.ingredients.some(dishIngredient => 
+        const matchedDishes = this.dishes.filter(dish =>
+            ingredients.some(ingredient =>
+                dish.ingredients.some(dishIngredient =>
                     dishIngredient.includes(ingredient) || ingredient.includes(dishIngredient)
                 )
             )
@@ -167,7 +167,7 @@ class MenuGenerator {
         }
 
         const dishNames = input.split(',').map(item => item.trim()).filter(item => item);
-        const availableDishes = this.dishes.filter(dish => 
+        const availableDishes = this.dishes.filter(dish =>
             dishNames.some(name => dish.name.includes(name) || name.includes(dish.name))
         );
 
@@ -183,7 +183,7 @@ class MenuGenerator {
     // 滚动老虎机效果
     startSlotMachine(candidates, mode, params = []) {
         const resultDisplay = document.getElementById('result-display');
-        
+
         // 显示滚动界面
         resultDisplay.innerHTML = `
             <div class="slot-machine">
@@ -212,56 +212,56 @@ class MenuGenerator {
     animateSlotMachine(candidates, mode, params) {
         const reel = document.getElementById('slot-reel');
         const progressBar = document.getElementById('loading-progress');
-        
+
         // 创建扩展的候选列表（包含重复项以实现循环效果）
         const extendedCandidates = [];
         for (let i = 0; i < 15; i++) {
             extendedCandidates.push(...candidates);
         }
-        
+
         // 最终选择的菜品
         const finalIndex = Math.floor(Math.random() * candidates.length);
         const finalDish = candidates[finalIndex];
-        
+
         // 动画参数
         const totalDuration = 2500; // 总持续时间（毫秒）
         const startTime = Date.now();
         let currentIndex = 0;
-        
+
         // 抛物线缓动函数 (easeOutQuad)
         const easeOutQuad = (t) => {
             return 1 - (1 - t) * (1 - t);
         };
-        
+
         // 反向抛物线缓动函数 (easeInQuad) - 用于速度计算
         const easeInQuad = (t) => {
             return t * t;
         };
-        
+
         const animate = () => {
             const currentTime = Date.now();
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / totalDuration, 1);
-            
+
             // 更新进度条
             progressBar.style.width = `${progress * 100}%`;
-            
+
             // 使用缓动函数计算当前速度
             // 开始时快速滚动，然后平滑减速
             const speedProgress = easeInQuad(progress);
             const minInterval = 30;  // 最小间隔（最快速度）
             const maxInterval = 300; // 最大间隔（最慢速度）
             const currentInterval = minInterval + (maxInterval - minInterval) * speedProgress;
-            
+
             // 显示前中后三个菜品，营造真实老虎机效果
             const prevIndex = (currentIndex - 1 + extendedCandidates.length) % extendedCandidates.length;
             const currIndex = currentIndex % extendedCandidates.length;
             const nextIndex = (currentIndex + 1) % extendedCandidates.length;
-            
+
             const prevDish = extendedCandidates[prevIndex];
             const currentDish = extendedCandidates[currIndex];
             const nextDish = extendedCandidates[nextIndex];
-            
+
             reel.innerHTML = `
                 <div class="slot-item prev">
                     <div class="dish-name-slot">${prevDish.name}</div>
@@ -273,9 +273,9 @@ class MenuGenerator {
                     <div class="dish-name-slot">${nextDish.name}</div>
                 </div>
             `;
-            
+
             currentIndex++;
-            
+
             if (progress < 1) {
                 // 根据当前速度设置下一次动画的延迟
                 setTimeout(animate, currentInterval);
@@ -287,7 +287,7 @@ class MenuGenerator {
                 }, 200);
             }
         };
-        
+
         // 开始动画
         animate();
     }
@@ -416,7 +416,7 @@ class MenuGenerator {
     // 添加菜品
     addDish(e) {
         e.preventDefault();
-        
+
         const name = document.getElementById('dish-name').value.trim();
         const ingredients = document.getElementById('dish-ingredients').value.trim().split(',').map(item => item.trim());
         const difficulty = parseInt(document.getElementById('dish-difficulty').value);
@@ -435,7 +435,7 @@ class MenuGenerator {
 
         const newDish = { name, ingredients, difficulty, time };
         this.dishes.push(newDish);
-        
+
         this.hideAddForm();
         this.showMessage(`成功添加菜品: ${name}`, 'success');
     }
@@ -494,19 +494,19 @@ class MenuGenerator {
     showMessage(message, type = 'info') {
         const toast = document.getElementById('toast');
         const messageEl = document.getElementById('toast-message');
-        
+
         // 清除之前的定时器
         if (this.toastTimer) {
             clearTimeout(this.toastTimer);
         }
-        
+
         // 设置消息内容和样式
         messageEl.textContent = message;
         toast.className = `toast ${type}`;
-        
+
         // 显示toast
         toast.classList.remove('hidden');
-        
+
         // 设置自动隐藏
         this.toastTimer = setTimeout(() => {
             toast.classList.add('hidden');
