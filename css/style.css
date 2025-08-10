@@ -348,7 +348,27 @@ body {
     right: 0;
 }
 
-/* 前一个菜品 - 上方，更大字号，清晰可见 */
+/* 流畅滚动的菜品项 */
+.slot-item-flowing {
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.slot-item-flowing .dish-name-slot {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--slot-highlight);
+    text-shadow: 0 0 10px rgba(99, 179, 237, 0.5);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    padding: 0 var(--spacing-md);
+}
+
+/* 保留原有的静态样式作为备用 */
 .slot-item.prev {
     top: 20px;
     opacity: 0.65;
@@ -356,7 +376,6 @@ body {
     filter: blur(0.3px);
 }
 
-/* 当前菜品 - 中央，突出显示 */
 .slot-item.current {
     top: 50%;
     transform: translateY(-50%) scale(1.05);
@@ -365,7 +384,6 @@ body {
     z-index: 10;
 }
 
-/* 下一个菜品 - 下方，更大字号，清晰可见 */
 .slot-item.next {
     bottom: 20px;
     opacity: 0.65;

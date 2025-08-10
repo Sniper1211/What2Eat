@@ -238,6 +238,10 @@ class MenuGenerator {
             return t * t;
         };
 
+        // 滚动参数
+        let scrollPosition = 0;
+        const itemHeight = 60; // 每个菜品项的高度
+        
         const animate = () => {
             const currentTime = Date.now();
             const elapsed = currentTime - startTime;
@@ -246,39 +250,72 @@ class MenuGenerator {
             // 更新进度条
             progressBar.style.width = `${progress * 100}%`;
 
-            // 使用缓动函数计算当前速度
-            // 开始时快速滚动，然后平滑减速
+            // 使用缓动函数计算滚动速度
             const speedProgress = easeInQuad(progress);
-            const minInterval = 30;  // 最小间隔（最快速度）
-            const maxInterval = 300; // 最大间隔（最慢速度）
-            const currentInterval = minInterval + (maxInterval - minInterval) * speedProgress;
-
-            // 显示前中后三个菜品，营造真实老虎机效果
-            const prevIndex = (currentIndex - 1 + extendedCandidates.length) % extendedCandidates.length;
-            const currIndex = currentIndex % extendedCandidates.length;
-            const nextIndex = (currentIndex + 1) % extendedCandidates.length;
-
-            const prevDish = extendedCandidates[prevIndex];
-            const currentDish = extendedCandidates[currIndex];
-            const nextDish = extendedCandidates[nextIndex];
-
-            reel.innerHTML = `
-                <div class="slot-item prev">
-                    <div class="dish-name-slot">${prevDish.name}</div>
-                </div>
-                <div class="slot-item current">
-                    <div class="dish-name-slot">${currentDish.name}</div>
-                </div>
-                <div class="slot-item next">
-                    <div class="dish-name-slot">${nextDish.name}</div>
-                </div>
-            `;
-
-            currentIndex++;
+            const minSpeed = 0.5;  // 最小滚动速度
+            const maxSpeed = 8;    // 最大滚动速度
+            const currentSpeed = maxSpeed - (maxSpeed - minSpeed) * speedProgress;
+            
+            // 更新滚动位置
+            scrollPosition += currentSpeed;
+            
+            // 创建连续滚动的菜品列表
+            const containerHeight = 180;
+            const visibleItems = Math.ceil(containerHeight / itemHeight) + 2;
+            
+            let itemsHTML = '';
+            for (let i = 0; i < visibleItems; i++) {
+                const itemIndex = Math.floor(scrollPosition / itemHeight) + i;
+                const dish = extendedCandidates[itemIndex % extendedCandidates.length];
+                
+                // 计算每个菜品的垂直位置
+                const itemPosition = (i * itemHeight) - (scrollPosition % itemHeight);
+                const centerPosition = containerHeight / 2;
+                const distanceFromCenter = Math.abs(itemPosition + itemHeight/2 - centerPosition);
+                
+                // 根据距离中心的位置确定样式
+                let opacity, scale, blur;
+                if (distanceFromCenter < itemHeight/2) {
+                    // 中心菜品
+                    opacity = 1;
+                    scale = 1.05;
+                    blur = 0;
+                } else if (distanceFromCenter < itemHeight * 1.5) {
+                    // 临近菜品
+                    opacity = 0.65;
+                    scale = 0.9;
+                    blur = 0.3;
+                } else {
+                    // 远离菜品
+                    opacity = 0.3;
+                    scale = 0.8;
+                    blur = 1;
+                }
+                
+                itemsHTML += `
+                    <div class="slot-item-flowing" style="
+                        position: absolute;
+                        top: ${itemPosition}px;
+                        left: 0;
+                        right: 0;
+                        height: ${itemHeight}px;
+                        opacity: ${opacity};
+                        transform: scale(${scale});
+                        filter: blur(${blur}px);
+                        transition: all 0.1s ease-out;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <div class="dish-name-slot">${dish.name}</div>
+                    </div>
+                `;
+            }
+            
+            reel.innerHTML = itemsHTML;
 
             if (progress < 1) {
-                // 根据当前速度设置下一次动画的延迟
-                setTimeout(animate, currentInterval);
+                requestAnimationFrame(animate);
             } else {
                 // 滚动结束，显示最终结果
                 setTimeout(() => {
