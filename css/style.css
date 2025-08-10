@@ -313,7 +313,7 @@ body {
     background: linear-gradient(145deg, #0f1419, #1a202c);
     border: 3px solid var(--slot-border);
     border-radius: var(--border-radius-xl);
-    height: 160px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -348,29 +348,29 @@ body {
     right: 0;
 }
 
-/* 前一个菜品 - 上方，适中字号，半透明 */
+/* 前一个菜品 - 上方，更大字号，清晰可见 */
 .slot-item.prev {
-    top: 25px;
-    opacity: 0.5;
-    transform: scale(0.85) translateY(-3px);
-    filter: blur(0.5px);
+    top: 20px;
+    opacity: 0.65;
+    transform: scale(0.9) translateY(-2px);
+    filter: blur(0.3px);
 }
 
-/* 当前菜品 - 中央，正常大小，柔和高亮 */
+/* 当前菜品 - 中央，突出显示 */
 .slot-item.current {
     top: 50%;
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.05);
     opacity: 1;
     filter: brightness(1.1);
     z-index: 10;
 }
 
-/* 下一个菜品 - 下方，适中字号，半透明 */
+/* 下一个菜品 - 下方，更大字号，清晰可见 */
 .slot-item.next {
-    bottom: 25px;
-    opacity: 0.5;
-    transform: scale(0.85) translateY(3px);
-    filter: blur(0.5px);
+    bottom: 20px;
+    opacity: 0.65;
+    transform: scale(0.9) translateY(2px);
+    filter: blur(0.3px);
 }
 
 .dish-name-slot {
@@ -398,14 +398,14 @@ body {
     letter-spacing: 1.5px;
 }
 
-/* 前后菜品的菜名 - 更清晰可见 */
+/* 前后菜品的菜名 - 显著增大，更清晰 */
 .slot-item.prev .dish-name-slot,
 .slot-item.next .dish-name-slot {
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     font-weight: 600;
-    text-shadow: 0 0 8px rgba(99, 179, 237, 0.4);
-    color: rgba(99, 179, 237, 0.8);
-    letter-spacing: 0.8px;
+    text-shadow: 0 0 10px rgba(99, 179, 237, 0.5);
+    color: rgba(99, 179, 237, 0.85);
+    letter-spacing: 1px;
 }
 
 
@@ -1007,7 +1007,7 @@ body {
 化的响应式设计 */
 @media (max-width: 768px) {
     .slot-display {
-        height: 140px;
+        height: 160px;
         margin: var(--spacing-lg) 0;
     }
     
@@ -1016,19 +1016,19 @@ body {
     }
     
     .slot-item.current .dish-name-slot {
-        font-size: 1.9rem;
+        font-size: 2rem;
         letter-spacing: 1px;
     }
     
     .slot-item.prev .dish-name-slot,
     .slot-item.next .dish-name-slot {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
     }
 }
 
 @media (max-width: 480px) {
     .slot-display {
-        height: 120px;
+        height: 140px;
     }
     
     .slot-title {
@@ -1036,12 +1036,12 @@ body {
     }
     
     .slot-item.current .dish-name-slot {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
         letter-spacing: 0.8px;
     }
     
     .slot-item.prev .dish-name-slot,
     .slot-item.next .dish-name-slot {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 }
