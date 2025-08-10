@@ -223,8 +223,8 @@ class MenuGenerator {
         const finalIndex = Math.floor(Math.random() * candidates.length);
         const finalDish = candidates[finalIndex];
 
-        // 动画参数
-        const totalDuration = 2500; // 总持续时间（毫秒）
+        // 动画参数 - 增加滚动时长
+        const totalDuration = 4000; // 总持续时间（毫秒）- 从2.5秒增加到4秒
         const startTime = Date.now();
         let currentIndex = 0;
 
@@ -249,22 +249,25 @@ class MenuGenerator {
             const elapsed = currentTime - startTime;
             const timeProgress = Math.min(elapsed / totalDuration, 1);
 
-            // 使用缓动函数计算滚动速度
+            // 使用缓动函数计算滚动速度 - 调整参数适配更长时间
             const speedProgress = easeInQuad(timeProgress);
-            const minSpeed = 0.5;  // 最小滚动速度
-            const maxSpeed = 8;    // 最大滚动速度
+            const minSpeed = 0.3;  // 最小滚动速度 - 更慢的结束速度
+            const maxSpeed = 6;    // 最大滚动速度 - 适中的起始速度
             const currentSpeed = maxSpeed - (maxSpeed - minSpeed) * speedProgress;
             
             // 累计滚动距离
             totalScrollDistance += currentSpeed;
             
-            // 基于滚动速度和时间的混合进度计算
-            const scrollProgress = Math.min(totalScrollDistance / targetScrollDistance, 1);
-            const speedBasedProgress = 1 - (currentSpeed / maxSpeed); // 速度越慢，进度越高
+            // 抛物线进度条：起步猛+中间快+结尾缓
+            // 使用easeOutQuad实现抛物线效果
+            const parabolicProgress = easeOutQuad(timeProgress);
             
-            // 混合两种进度计算方式，让进度条更好地反映减速过程
-            const combinedProgress = Math.max(scrollProgress, speedBasedProgress * timeProgress);
-            progressBar.style.width = `${combinedProgress * 100}%`;
+            // 进一步调整曲线，让起步更猛，结尾更缓
+            const enhancedProgress = timeProgress < 0.1 
+                ? timeProgress * 3  // 前10%时间，进度条快速到30%
+                : 0.3 + (parabolicProgress - 0.3) * 0.7 / 0.7; // 后90%时间，剩余70%进度用抛物线
+            
+            progressBar.style.width = `${Math.min(enhancedProgress, 1) * 100}%`;
             
             // 当速度足够慢或时间到了就结束
             const shouldEnd = currentSpeed <= minSpeed * 1.1 || timeProgress >= 1;
