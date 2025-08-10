@@ -240,21 +240,34 @@ class MenuGenerator {
 
         // 滚动参数
         let scrollPosition = 0;
+        let totalScrollDistance = 0;
         const itemHeight = 60; // 每个菜品项的高度
+        const targetScrollDistance = itemHeight * 50; // 目标滚动距离
         
         const animate = () => {
             const currentTime = Date.now();
             const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / totalDuration, 1);
-
-            // 更新进度条
-            progressBar.style.width = `${progress * 100}%`;
+            const timeProgress = Math.min(elapsed / totalDuration, 1);
 
             // 使用缓动函数计算滚动速度
-            const speedProgress = easeInQuad(progress);
+            const speedProgress = easeInQuad(timeProgress);
             const minSpeed = 0.5;  // 最小滚动速度
             const maxSpeed = 8;    // 最大滚动速度
             const currentSpeed = maxSpeed - (maxSpeed - minSpeed) * speedProgress;
+            
+            // 累计滚动距离
+            totalScrollDistance += currentSpeed;
+            
+            // 基于滚动速度和时间的混合进度计算
+            const scrollProgress = Math.min(totalScrollDistance / targetScrollDistance, 1);
+            const speedBasedProgress = 1 - (currentSpeed / maxSpeed); // 速度越慢，进度越高
+            
+            // 混合两种进度计算方式，让进度条更好地反映减速过程
+            const combinedProgress = Math.max(scrollProgress, speedBasedProgress * timeProgress);
+            progressBar.style.width = `${combinedProgress * 100}%`;
+            
+            // 当速度足够慢或时间到了就结束
+            const shouldEnd = currentSpeed <= minSpeed * 1.1 || timeProgress >= 1;
             
             // 更新滚动位置
             scrollPosition += currentSpeed;
@@ -314,7 +327,7 @@ class MenuGenerator {
             
             reel.innerHTML = itemsHTML;
 
-            if (progress < 1) {
+            if (!shouldEnd) {
                 requestAnimationFrame(animate);
             } else {
                 // 滚动结束，显示最终结果
