@@ -189,7 +189,6 @@ class MenuGenerator {
             <div class="slot-machine">
                 <div class="slot-header">
                     <div class="slot-title">🎰 正在筛选中...</div>
-                    <div class="slot-counter">候选菜品: ${candidates.length} 个</div>
                 </div>
                 <div class="slot-display">
                     <div class="slot-reel" id="slot-reel">
