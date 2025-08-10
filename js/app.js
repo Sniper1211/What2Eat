@@ -266,22 +266,12 @@ class MenuGenerator {
             reel.innerHTML = `
                 <div class="slot-item prev">
                     <div class="dish-name-slot">${prevDish.name}</div>
-                    <div class="dish-info-slot">
-                        <span class="difficulty-slot">${'★'.repeat(prevDish.difficulty)}</span>
-                    </div>
                 </div>
                 <div class="slot-item current">
                     <div class="dish-name-slot">${currentDish.name}</div>
-                    <div class="dish-info-slot">
-                        <span class="ingredients-slot">${currentDish.ingredients.slice(0, 3).join(', ')}</span>
-                        <span class="difficulty-slot">${'★'.repeat(currentDish.difficulty)}</span>
-                    </div>
                 </div>
                 <div class="slot-item next">
                     <div class="dish-name-slot">${nextDish.name}</div>
-                    <div class="dish-info-slot">
-                        <span class="difficulty-slot">${'★'.repeat(nextDish.difficulty)}</span>
-                    </div>
                 </div>
             `;
             

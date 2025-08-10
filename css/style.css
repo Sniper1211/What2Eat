@@ -312,8 +312,8 @@ body {
 .slot-display {
     background: linear-gradient(145deg, #0f1419, #1a202c);
     border: 3px solid var(--slot-border);
-    border-radius: var(--border-radius-lg);
-    height: 200px;
+    border-radius: var(--border-radius-xl);
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -321,8 +321,9 @@ body {
     position: relative;
     overflow: hidden;
     box-shadow: 
-        inset 0 0 40px rgba(0, 0, 0, 0.3),
-        0 0 20px var(--slot-glow);
+        inset 0 0 30px rgba(0, 0, 0, 0.4),
+        0 0 25px var(--slot-glow),
+        inset 0 2px 4px rgba(66, 153, 225, 0.1);
 }
 
 .slot-reel {
@@ -337,82 +338,77 @@ body {
 
 .slot-item {
     width: 100%;
-    padding: var(--spacing-md) var(--spacing-lg);
     text-align: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    left: 0;
+    right: 0;
 }
 
 /* 前一个菜品 - 上方，小字号，半透明 */
 .slot-item.prev {
-    top: 15px;
-    opacity: 0.3;
-    transform: scale(0.75) translateY(-10px);
-    filter: blur(1px);
+    top: 20px;
+    opacity: 0.25;
+    transform: scale(0.7) translateY(-5px);
+    filter: blur(2px);
 }
 
 /* 当前菜品 - 中央，正常大小，高亮 */
 .slot-item.current {
     top: 50%;
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.15);
     opacity: 1;
-    filter: brightness(1.2) drop-shadow(0 0 15px rgba(99, 179, 237, 0.8));
+    filter: brightness(1.3) drop-shadow(0 0 20px rgba(99, 179, 237, 0.9));
     z-index: 10;
 }
 
 /* 下一个菜品 - 下方，小字号，半透明 */
 .slot-item.next {
-    bottom: 15px;
-    opacity: 0.3;
-    transform: scale(0.75) translateY(10px);
-    filter: blur(1px);
+    bottom: 20px;
+    opacity: 0.25;
+    transform: scale(0.7) translateY(5px);
+    filter: blur(2px);
 }
 
 .dish-name-slot {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--slot-highlight);
-    margin-bottom: var(--spacing-sm);
-    text-shadow: 0 0 15px rgba(99, 179, 237, 0.6);
-    letter-spacing: 0.5px;
+    text-shadow: 0 0 12px rgba(99, 179, 237, 0.6);
+    letter-spacing: 1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
+    max-width: 90%;
+    padding: 0 var(--spacing-md);
 }
 
-/* 当前菜品的菜名更大 */
+/* 当前菜品的菜名更大更亮 */
 .slot-item.current .dish-name-slot {
-    font-size: 2.2rem;
-    text-shadow: 0 0 25px rgba(99, 179, 237, 0.8);
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-shadow: 
+        0 0 30px rgba(99, 179, 237, 1),
+        0 0 60px rgba(99, 179, 237, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    letter-spacing: 2px;
 }
 
-/* 前后菜品的菜名更小 */
+/* 前后菜品的菜名更小更暗 */
 .slot-item.prev .dish-name-slot,
 .slot-item.next .dish-name-slot {
-    font-size: 1.3rem;
-    text-shadow: 0 0 8px rgba(99, 179, 237, 0.4);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(99, 179, 237, 0.3);
+    color: rgba(99, 179, 237, 0.7);
+    letter-spacing: 0.5px;
 }
 
-.dish-info-slot {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    font-size: 0.95rem;
-}
 
-.ingredients-slot {
-    color: rgba(226, 232, 240, 0.8);
-}
-
-.difficulty-slot {
-    color: #ffd700;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-}
 
 .slot-footer {
     margin-top: var(--spacing-xl);
@@ -742,7 +738,7 @@ body {
     transform: translateX(0);
 }
 
-/* 扫描线效果 */
+/* 增强的扫描线效果 */
 .slot-display::before {
     content: '';
     position: absolute;
@@ -752,14 +748,34 @@ body {
     height: 100%;
     background: linear-gradient(90deg, 
         transparent, 
+        rgba(99, 179, 237, 0.1), 
+        rgba(99, 179, 237, 0.3), 
+        rgba(255, 255, 255, 0.4), 
+        rgba(99, 179, 237, 0.3), 
+        rgba(99, 179, 237, 0.1), 
+        transparent
+    );
+    animation: scan 2.5s infinite;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* 添加垂直扫描线 */
+.slot-display::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, 
+        transparent, 
         rgba(99, 179, 237, 0.05), 
-        rgba(99, 179, 237, 0.15), 
-        rgba(99, 179, 237, 0.25), 
-        rgba(99, 179, 237, 0.15), 
+        rgba(99, 179, 237, 0.1), 
         rgba(99, 179, 237, 0.05), 
         transparent
     );
-    animation: scan 3s infinite;
+    animation: scanVertical 4s infinite;
     pointer-events: none;
     z-index: 5;
 }
@@ -788,6 +804,11 @@ body {
 @keyframes scan {
     0% { left: -100%; }
     100% { left: 100%; }
+}
+
+@keyframes scanVertical {
+    0% { top: -100%; }
+    100% { top: 100%; }
 }
 
 @keyframes blink {
@@ -982,4 +1003,45 @@ body {
 .suggestions li {
     margin-bottom: var(--spacing-sm);
     line-height: 1.5;
+}/* 优
+化的响应式设计 */
+@media (max-width: 768px) {
+    .slot-display {
+        height: 140px;
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .slot-title {
+        font-size: 1.6rem;
+    }
+    
+    .slot-item.current .dish-name-slot {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+    
+    .slot-item.prev .dish-name-slot,
+    .slot-item.next .dish-name-slot {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slot-display {
+        height: 120px;
+    }
+    
+    .slot-title {
+        font-size: 1.4rem;
+    }
+    
+    .slot-item.current .dish-name-slot {
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .slot-item.prev .dish-name-slot,
+    .slot-item.next .dish-name-slot {
+        font-size: 0.9rem;
+    }
 }
