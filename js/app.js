@@ -241,7 +241,7 @@ class MenuGenerator {
         let scrollPosition = 0;
         let totalScrollDistance = 0;
         const itemHeight = 60; // 每个菜品项的高度
-        
+
         // 计算目标滚动距离，确保最终停在finalDish上
         const baseScrollDistance = itemHeight * 40; // 基础滚动距离
         const finalOffset = finalIndex * itemHeight; // 最终菜品的偏移
@@ -285,7 +285,7 @@ class MenuGenerator {
             let itemsHTML = '';
             for (let i = 0; i < visibleItems; i++) {
                 const itemIndex = Math.floor(scrollPosition / itemHeight) + i;
-                
+
                 // 如果接近结束，确保显示正确的最终菜品
                 let dish;
                 if (shouldEnd && i === Math.floor(visibleItems / 2)) {
@@ -345,16 +345,49 @@ class MenuGenerator {
             if (!shouldEnd) {
                 requestAnimationFrame(animate);
             } else {
-                // 滚动结束，显示最终结果
-                setTimeout(() => {
-                    this.displayFinalResult(finalDish, mode, params);
-                    this.showMessage(`🎰 滚动完成! 推荐: ${finalDish.name}`, 'success');
-                }, 200);
+                // 滚动结束，显示最终选中菜品的特殊效果
+                this.showFinalSelection(reel, finalDish, containerHeight, itemHeight, mode, params);
             }
         };
 
         // 开始动画
         animate();
+    }
+
+    // 显示最终选中菜品的特殊效果
+    showFinalSelection(reel, finalDish, containerHeight, itemHeight, mode, params) {
+        const centerPosition = containerHeight / 2;
+        
+        // 显示最终选中的菜品，带有闪烁效果
+        reel.innerHTML = `
+            <div class="slot-item-final" style="
+                position: absolute;
+                top: ${centerPosition - itemHeight/2}px;
+                left: 0;
+                right: 0;
+                height: ${itemHeight}px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 1;
+                transform: scale(1.1);
+                z-index: 20;
+            ">
+                <div class="dish-name-slot final-selected">${finalDish.name}</div>
+            </div>
+        `;
+
+        // 添加闪烁动画类
+        const finalElement = reel.querySelector('.final-selected');
+        if (finalElement) {
+            finalElement.classList.add('pulsing-final');
+        }
+
+        // 2秒后显示最终结果页面
+        setTimeout(() => {
+            this.displayFinalResult(finalDish, mode, params);
+            this.showMessage(`🎰 滚动完成! 推荐: ${finalDish.name}`, 'success');
+        }, 2000);
     }
 
     // 显示最终结果
