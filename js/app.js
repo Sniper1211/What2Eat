@@ -17,10 +17,10 @@ class MenuGenerator {
     loadDefaultDishes() {
         this.dishes = [
             // 经典家常菜
-            { name: '番茄鸡蛋', ingredients: ['番茄', '鸡蛋', '葱'], difficulty: 1, time: 15, marked: true },
+            { name: '番茄鸡蛋', ingredients: ['番茄', '鸡蛋', '葱'], difficulty: 1, time: 15, marked: false },
             { name: '红烧肉', ingredients: ['五花肉', '生抽', '老抽', '冰糖'], difficulty: 4, time: 90, marked: false },
-            { name: '青椒土豆丝', ingredients: ['土豆', '青椒', '蒜'], difficulty: 2, time: 20, marked: true },
-            { name: '宫保鸡丁', ingredients: ['鸡胸肉', '花生米', '干辣椒'], difficulty: 3, time: 30, marked: true },
+            { name: '青椒土豆丝', ingredients: ['土豆', '青椒', '蒜'], difficulty: 2, time: 20, marked: false },
+            { name: '宫保鸡丁', ingredients: ['鸡胸肉', '花生米', '干辣椒'], difficulty: 3, time: 30, marked: false },
             { name: '蒸蛋羹', ingredients: ['鸡蛋', '温水', '盐'], difficulty: 1, time: 25, marked: false },
             { name: '麻婆豆腐', ingredients: ['豆腐', '肉末', '豆瓣酱'], difficulty: 3, time: 25, marked: false },
             { name: '糖醋里脊', ingredients: ['里脊肉', '醋', '糖', '番茄酱'], difficulty: 3, time: 35, marked: false },
