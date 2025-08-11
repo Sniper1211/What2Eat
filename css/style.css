@@ -1140,4 +1140,36 @@ body {
             font-size: 2.1rem;
         }
     }
+}/* 最终
+选中时的前后菜品样式 */
+.slot-item-final-context {
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.slot-item-final-context .dish-name-slot {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: rgba(99, 179, 237, 0.6);
+    text-shadow: 0 0 8px rgba(99, 179, 237, 0.3);
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    padding: 0 var(--spacing-md);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .slot-item-final-context .dish-name-slot {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slot-item-final-context .dish-name-slot {
+        font-size: 1.2rem;
+    }
 }

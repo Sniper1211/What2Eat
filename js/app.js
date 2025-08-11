@@ -357,12 +357,36 @@ class MenuGenerator {
     // 显示最终选中菜品的特殊效果
     showFinalSelection(reel, finalDish, containerHeight, itemHeight, mode, params) {
         const centerPosition = containerHeight / 2;
+
+        // 获取前后菜品（从候选列表中）
+        const candidates = this.dishes; // 使用原始菜品列表
+        const finalIndex = candidates.findIndex(dish => dish.name === finalDish.name);
+        const prevDish = candidates[(finalIndex - 1 + candidates.length) % candidates.length];
+        const nextDish = candidates[(finalIndex + 1) % candidates.length];
         
-        // 显示最终选中的菜品，带有闪烁效果
+        // 显示三个菜品：前、中（选中）、后，前后菜品更透明
         reel.innerHTML = `
+            <!-- 前一个菜品 - 很透明 -->
+            <div class="slot-item-final-context" style="
+                position: absolute;
+                top: ${centerPosition - itemHeight * 1.5}px;
+                left: 0;
+                right: 0;
+                height: ${itemHeight}px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0.15;
+                transform: scale(0.8);
+                z-index: 5;
+            ">
+                <div class="dish-name-slot">${prevDish.name}</div>
+            </div>
+            
+            <!-- 当前选中菜品 - 闪烁高亮 -->
             <div class="slot-item-final" style="
                 position: absolute;
-                top: ${centerPosition - itemHeight/2}px;
+                top: ${centerPosition - itemHeight / 2}px;
                 left: 0;
                 right: 0;
                 height: ${itemHeight}px;
@@ -375,6 +399,23 @@ class MenuGenerator {
             ">
                 <div class="dish-name-slot final-selected">${finalDish.name}</div>
             </div>
+            
+            <!-- 后一个菜品 - 很透明 -->
+            <div class="slot-item-final-context" style="
+                position: absolute;
+                top: ${centerPosition + itemHeight * 0.5}px;
+                left: 0;
+                right: 0;
+                height: ${itemHeight}px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0.15;
+                transform: scale(0.8);
+                z-index: 5;
+            ">
+                <div class="dish-name-slot">${nextDish.name}</div>
+            </div>
         `;
 
         // 添加闪烁动画类
@@ -383,11 +424,10 @@ class MenuGenerator {
             finalElement.classList.add('pulsing-final');
         }
 
-        // 2秒后显示最终结果页面
+        // 只显示消息，不跳转到结果页面
         setTimeout(() => {
-            this.displayFinalResult(finalDish, mode, params);
-            this.showMessage(`🎰 滚动完成! 推荐: ${finalDish.name}`, 'success');
-        }, 2000);
+            this.showMessage(`🎰 推荐完成! 今天就做: ${finalDish.name}`, 'success');
+        }, 1000);
     }
 
     // 显示最终结果
