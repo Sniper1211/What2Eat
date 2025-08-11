@@ -531,7 +531,7 @@ class MenuGenerator {
         }
 
         const newDish = { name, ingredients, difficulty, time, marked: false };
-        this.dishes.push(newDish);
+        this.dishes.unshift(newDish); // 使用unshift将新菜品添加到数组开头
 
         this.hideAddForm();
         this.showMessage(`成功添加菜品: ${name}`, 'success');
