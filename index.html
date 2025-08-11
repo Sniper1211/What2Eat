@@ -10,6 +10,15 @@
 
 <body>
     <div class="container">
+        <!-- 导演模式开关 - 右上角 -->
+        <div class="director-mode-corner">
+            <label class="director-toggle-corner">
+                <input type="checkbox" id="director-mode-toggle">
+                <span class="toggle-slider-corner"></span>
+                <span class="director-emoji">🎬</span>
+            </label>
+        </div>
+
         <header class="header">
             <h1 class="title">🍽️ 程序员菜单生成器</h1>
             <p class="subtitle">console.log("今天吃什么？")</p>
@@ -22,28 +31,6 @@
                     <button id="random-btn" class="btn btn-primary">
                         🎲 随机推荐
                     </button>
-                    <button id="ingredient-btn" class="btn btn-secondary hidden">
-                        🥬 食材筛选
-                    </button>
-                    <button id="choose-btn" class="btn btn-secondary hidden">
-                        📝 指定选择
-                    </button>
-                </div>
-
-                <!-- 筛选面板 -->
-                <div id="filter-panel" class="filter-panel hidden">
-                    <div id="ingredient-filter" class="filter-group hidden">
-                        <label for="ingredient-input">包含食材：</label>
-                        <input type="text" id="ingredient-input" placeholder="例如：鸡蛋,土豆">
-                    </div>
-                    <div id="choose-filter" class="filter-group hidden">
-                        <label for="choose-input">选择菜品：</label>
-                        <input type="text" id="choose-input" placeholder="例如：番茄鸡蛋,红烧肉">
-                    </div>
-                    <div class="filter-actions">
-                        <button id="apply-btn" class="btn btn-small">确定</button>
-                        <button id="cancel-btn" class="btn btn-small btn-outline">取消</button>
-                    </div>
                 </div>
             </section>
 

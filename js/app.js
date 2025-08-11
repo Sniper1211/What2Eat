@@ -3,6 +3,7 @@ class MenuGenerator {
     constructor() {
         this.dishes = [];
         this.currentMode = null;
+        this.directorMode = false; // 导演模式状态
         this.init();
     }
 
@@ -16,46 +17,46 @@ class MenuGenerator {
     loadDefaultDishes() {
         this.dishes = [
             // 经典家常菜
-            { name: '番茄鸡蛋', ingredients: ['番茄', '鸡蛋', '葱'], difficulty: 1, time: 15 },
-            { name: '红烧肉', ingredients: ['五花肉', '生抽', '老抽', '冰糖'], difficulty: 4, time: 90 },
-            { name: '青椒土豆丝', ingredients: ['土豆', '青椒', '蒜'], difficulty: 2, time: 20 },
-            { name: '宫保鸡丁', ingredients: ['鸡胸肉', '花生米', '干辣椒'], difficulty: 3, time: 30 },
-            { name: '蒸蛋羹', ingredients: ['鸡蛋', '温水', '盐'], difficulty: 1, time: 25 },
-            { name: '麻婆豆腐', ingredients: ['豆腐', '肉末', '豆瓣酱'], difficulty: 3, time: 25 },
-            { name: '糖醋里脊', ingredients: ['里脊肉', '醋', '糖', '番茄酱'], difficulty: 3, time: 35 },
-            { name: '白菜炖豆腐', ingredients: ['白菜', '豆腐', '粉条'], difficulty: 2, time: 30 },
-            { name: '可乐鸡翅', ingredients: ['鸡翅', '可乐', '生抽'], difficulty: 2, time: 40 },
-            { name: '蚂蚁上树', ingredients: ['粉条', '肉末', '豆瓣酱'], difficulty: 3, time: 25 },
+            { name: '番茄鸡蛋', ingredients: ['番茄', '鸡蛋', '葱'], difficulty: 1, time: 15, marked: true },
+            { name: '红烧肉', ingredients: ['五花肉', '生抽', '老抽', '冰糖'], difficulty: 4, time: 90, marked: false },
+            { name: '青椒土豆丝', ingredients: ['土豆', '青椒', '蒜'], difficulty: 2, time: 20, marked: true },
+            { name: '宫保鸡丁', ingredients: ['鸡胸肉', '花生米', '干辣椒'], difficulty: 3, time: 30, marked: true },
+            { name: '蒸蛋羹', ingredients: ['鸡蛋', '温水', '盐'], difficulty: 1, time: 25, marked: false },
+            { name: '麻婆豆腐', ingredients: ['豆腐', '肉末', '豆瓣酱'], difficulty: 3, time: 25, marked: false },
+            { name: '糖醋里脊', ingredients: ['里脊肉', '醋', '糖', '番茄酱'], difficulty: 3, time: 35, marked: false },
+            { name: '白菜炖豆腐', ingredients: ['白菜', '豆腐', '粉条'], difficulty: 2, time: 30, marked: false },
+            { name: '可乐鸡翅', ingredients: ['鸡翅', '可乐', '生抽'], difficulty: 2, time: 40, marked: false },
+            { name: '蚂蚁上树', ingredients: ['粉条', '肉末', '豆瓣酱'], difficulty: 3, time: 25, marked: false },
 
             // 素菜系列
-            { name: '地三鲜', ingredients: ['茄子', '土豆', '青椒', '蒜'], difficulty: 2, time: 25 },
-            { name: '干煸豆角', ingredients: ['豆角', '肉末', '干辣椒', '花椒'], difficulty: 2, time: 20 },
-            { name: '醋溜白菜', ingredients: ['白菜', '醋', '干辣椒', '花椒'], difficulty: 1, time: 15 },
-            { name: '凉拌黄瓜', ingredients: ['黄瓜', '蒜', '醋', '香油'], difficulty: 1, time: 10 },
-            { name: '韭菜炒蛋', ingredients: ['韭菜', '鸡蛋', '盐'], difficulty: 1, time: 12 },
+            { name: '地三鲜', ingredients: ['茄子', '土豆', '青椒', '蒜'], difficulty: 2, time: 25, marked: false },
+            { name: '干煸豆角', ingredients: ['豆角', '肉末', '干辣椒', '花椒'], difficulty: 2, time: 20, marked: false },
+            { name: '醋溜白菜', ingredients: ['白菜', '醋', '干辣椒', '花椒'], difficulty: 1, time: 15, marked: false },
+            { name: '凉拌黄瓜', ingredients: ['黄瓜', '蒜', '醋', '香油'], difficulty: 1, time: 10, marked: false },
+            { name: '韭菜炒蛋', ingredients: ['韭菜', '鸡蛋', '盐'], difficulty: 1, time: 12, marked: false },
 
             // 肉菜系列
-            { name: '回锅肉', ingredients: ['五花肉', '豆瓣酱', '青椒', '蒜苗'], difficulty: 3, time: 35 },
-            { name: '鱼香肉丝', ingredients: ['里脊肉', '木耳', '胡萝卜', '豆瓣酱'], difficulty: 3, time: 30 },
-            { name: '红烧排骨', ingredients: ['排骨', '生抽', '老抽', '冰糖'], difficulty: 3, time: 60 },
-            { name: '水煮肉片', ingredients: ['里脊肉', '白菜', '豆瓣酱', '花椒'], difficulty: 4, time: 40 },
-            { name: '口水鸡', ingredients: ['鸡腿', '花椒', '辣椒油', '蒜泥'], difficulty: 3, time: 45 },
+            { name: '回锅肉', ingredients: ['五花肉', '豆瓣酱', '青椒', '蒜苗'], difficulty: 3, time: 35, marked: false },
+            { name: '鱼香肉丝', ingredients: ['里脊肉', '木耳', '胡萝卜', '豆瓣酱'], difficulty: 3, time: 30, marked: false },
+            { name: '红烧排骨', ingredients: ['排骨', '生抽', '老抽', '冰糖'], difficulty: 3, time: 60, marked: false },
+            { name: '水煮肉片', ingredients: ['里脊肉', '白菜', '豆瓣酱', '花椒'], difficulty: 4, time: 40, marked: false },
+            { name: '口水鸡', ingredients: ['鸡腿', '花椒', '辣椒油', '蒜泥'], difficulty: 3, time: 45, marked: false },
 
             // 汤品系列
-            { name: '西红柿蛋花汤', ingredients: ['番茄', '鸡蛋', '葱花'], difficulty: 1, time: 15 },
-            { name: '冬瓜排骨汤', ingredients: ['冬瓜', '排骨', '姜'], difficulty: 2, time: 80 },
-            { name: '紫菜蛋花汤', ingredients: ['紫菜', '鸡蛋', '香油'], difficulty: 1, time: 10 },
+            { name: '西红柿蛋花汤', ingredients: ['番茄', '鸡蛋', '葱花'], difficulty: 1, time: 15, marked: false },
+            { name: '冬瓜排骨汤', ingredients: ['冬瓜', '排骨', '姜'], difficulty: 2, time: 80, marked: false },
+            { name: '紫菜蛋花汤', ingredients: ['紫菜', '鸡蛋', '香油'], difficulty: 1, time: 10, marked: false },
 
             // 面食系列
-            { name: '西红柿鸡蛋面', ingredients: ['面条', '番茄', '鸡蛋'], difficulty: 2, time: 20 },
-            { name: '炸酱面', ingredients: ['面条', '肉末', '甜面酱', '黄瓜'], difficulty: 3, time: 30 },
-            { name: '蛋炒饭', ingredients: ['米饭', '鸡蛋', '胡萝卜', '豌豆'], difficulty: 2, time: 15 },
+            { name: '西红柿鸡蛋面', ingredients: ['面条', '番茄', '鸡蛋'], difficulty: 2, time: 20, marked: false },
+            { name: '炸酱面', ingredients: ['面条', '肉末', '甜面酱', '黄瓜'], difficulty: 3, time: 30, marked: false },
+            { name: '蛋炒饭', ingredients: ['米饭', '鸡蛋', '胡萝卜', '豌豆'], difficulty: 2, time: 15, marked: false },
 
             // 特色菜
-            { name: '麻辣香锅', ingredients: ['土豆', '豆腐', '肉片', '麻辣料'], difficulty: 4, time: 45 },
-            { name: '水煮鱼', ingredients: ['鱼片', '豆芽', '豆瓣酱', '花椒'], difficulty: 5, time: 50 },
-            { name: '毛血旺', ingredients: ['鸭血', '豆腐', '豆芽', '辣椒'], difficulty: 4, time: 40 },
-            { name: '酸菜鱼', ingredients: ['鱼片', '酸菜', '豆腐', '粉条'], difficulty: 4, time: 45 }
+            { name: '麻辣香锅', ingredients: ['土豆', '豆腐', '肉片', '麻辣料'], difficulty: 4, time: 45, marked: false },
+            { name: '水煮鱼', ingredients: ['鱼片', '豆芽', '豆瓣酱', '花椒'], difficulty: 5, time: 50, marked: false },
+            { name: '毛血旺', ingredients: ['鸭血', '豆腐', '豆芽', '辣椒'], difficulty: 4, time: 40, marked: false },
+            { name: '酸菜鱼', ingredients: ['鱼片', '酸菜', '豆腐', '粉条'], difficulty: 4, time: 45, marked: false }
         ];
     }
 
@@ -63,12 +64,15 @@ class MenuGenerator {
     bindEvents() {
         // 主要功能按钮
         document.getElementById('random-btn').addEventListener('click', () => this.randomRecommend());
-        document.getElementById('ingredient-btn').addEventListener('click', () => this.showIngredientFilter());
-        document.getElementById('choose-btn').addEventListener('click', () => this.showChooseFilter());
 
-        // 筛选面板按钮
-        document.getElementById('apply-btn').addEventListener('click', () => this.applyFilter());
-        document.getElementById('cancel-btn').addEventListener('click', () => this.hideFilter());
+        // 导演模式开关
+        document.getElementById('director-mode-toggle').addEventListener('change', (e) => {
+            this.directorMode = e.target.checked;
+            this.showMessage(
+                this.directorMode ? '🎬 导演模式已开启' : '🎬 导演模式已关闭',
+                'info'
+            );
+        });
 
         // 管理按钮
         document.getElementById('add-btn').addEventListener('click', () => this.showAddForm());
@@ -90,98 +94,31 @@ class MenuGenerator {
             return;
         }
 
-        this.startSlotMachine(this.dishes, 'random');
-    }
-
-    // 显示食材筛选
-    showIngredientFilter() {
-        this.currentMode = 'ingredient';
-        this.showFilter();
-        document.getElementById('ingredient-filter').classList.remove('hidden');
-        document.getElementById('choose-filter').classList.add('hidden');
-    }
-
-    // 显示指定选择
-    showChooseFilter() {
-        this.currentMode = 'choose';
-        this.showFilter();
-        document.getElementById('ingredient-filter').classList.add('hidden');
-        document.getElementById('choose-filter').classList.remove('hidden');
-    }
-
-    // 显示筛选面板
-    showFilter() {
-        document.getElementById('filter-panel').classList.remove('hidden');
-    }
-
-    // 隐藏筛选面板
-    hideFilter() {
-        document.getElementById('filter-panel').classList.add('hidden');
-        document.getElementById('ingredient-filter').classList.add('hidden');
-        document.getElementById('choose-filter').classList.add('hidden');
-        this.clearInputs();
-    }
-
-    // 应用筛选
-    applyFilter() {
-        if (this.currentMode === 'ingredient') {
-            this.ingredientRecommend();
-        } else if (this.currentMode === 'choose') {
-            this.chooseRecommend();
-        }
-        this.hideFilter();
-    }
-
-    // 基于食材推荐
-    ingredientRecommend() {
-        const input = document.getElementById('ingredient-input').value.trim();
-        if (!input) {
-            this.showMessage('请输入食材', 'warning');
-            return;
+        // 导演模式：预设结果但视觉上显示所有菜品
+        let finalDish = null;
+        if (this.directorMode) {
+            const markedDishes = this.dishes.filter(dish => dish.marked);
+            if (markedDishes.length > 0) {
+                if (markedDishes.length > 1) {
+                    this.showMessage('🎬 导演模式：请只标记一个菜品', 'warning');
+                    return;
+                }
+                finalDish = markedDishes[0];
+                this.showMessage('🎬 导演模式：已内定结果', 'info');
+            } else {
+                this.showMessage('🎬 导演模式：未找到标记菜品，请先标记一个菜品', 'warning');
+                return;
+            }
         }
 
-        const ingredients = input.split(',').map(item => item.trim()).filter(item => item);
-        const matchedDishes = this.dishes.filter(dish =>
-            ingredients.some(ingredient =>
-                dish.ingredients.some(dishIngredient =>
-                    dishIngredient.includes(ingredient) || ingredient.includes(dishIngredient)
-                )
-            )
-        );
-
-        if (matchedDishes.length === 0) {
-            this.showMessage(`未找到包含 [${ingredients.join(', ')}] 的菜品`, 'warning');
-            this.displayNoResult('ingredient', ingredients);
-            return;
-        }
-
-        this.startSlotMachine(matchedDishes, 'ingredient', ingredients);
+        // 视觉上始终显示所有菜品参与滚动
+        this.startSlotMachine(this.dishes, 'random', [], finalDish);
     }
 
-    // 指定选择推荐
-    chooseRecommend() {
-        const input = document.getElementById('choose-input').value.trim();
-        if (!input) {
-            this.showMessage('请输入菜品名称', 'warning');
-            return;
-        }
 
-        const dishNames = input.split(',').map(item => item.trim()).filter(item => item);
-        const availableDishes = this.dishes.filter(dish =>
-            dishNames.some(name => dish.name.includes(name) || name.includes(dish.name))
-        );
-
-        if (availableDishes.length === 0) {
-            this.showMessage(`未找到菜品: [${dishNames.join(', ')}]`, 'warning');
-            this.displayNoResult('choose', dishNames);
-            return;
-        }
-
-        this.startSlotMachine(availableDishes, 'choose', dishNames);
-    }
 
     // 滚动老虎机效果
-    startSlotMachine(candidates, mode, params = []) {
+    startSlotMachine(candidates, mode, params = [], presetResult = null) {
         const resultDisplay = document.getElementById('result-display');
 
         // 显示滚动界面
@@ -205,11 +142,11 @@ class MenuGenerator {
         `;
 
         // 开始滚动动画
-        this.animateSlotMachine(candidates, mode, params);
+        this.animateSlotMachine(candidates, mode, params, presetResult);
     }
 
     // 滚动动画逻辑 - 使用抛物线缓动
-    animateSlotMachine(candidates, mode, params) {
+    animateSlotMachine(candidates, mode, params, presetResult = null) {
         const reel = document.getElementById('slot-reel');
         const progressBar = document.getElementById('loading-progress');
 
@@ -220,8 +157,16 @@ class MenuGenerator {
         }
 
         // 最终选择的菜品
-        const finalIndex = Math.floor(Math.random() * candidates.length);
-        const finalDish = candidates[finalIndex];
+        let finalDish, finalIndex;
+        if (presetResult) {
+            // 导演模式：使用预设结果
+            finalDish = presetResult;
+            finalIndex = candidates.findIndex(dish => dish.name === presetResult.name);
+        } else {
+            // 普通模式：真随机选择
+            finalIndex = Math.floor(Math.random() * candidates.length);
+            finalDish = candidates[finalIndex];
+        }
 
         // 动画参数 - 增加滚动时长
         const totalDuration = 4000; // 总持续时间（毫秒）- 从2.5秒增加到4秒
@@ -239,44 +184,77 @@ class MenuGenerator {
 
         // 滚动参数
         let scrollPosition = 0;
-        let totalScrollDistance = 0;
         const itemHeight = 60; // 每个菜品项的高度
 
-        // 计算目标滚动距离，确保最终停在finalDish上
-        const baseScrollDistance = itemHeight * 40; // 基础滚动距离
-        const finalOffset = finalIndex * itemHeight; // 最终菜品的偏移
-        const targetScrollDistance = baseScrollDistance + finalOffset;
+        // 计算目标滚动距离，确保最终自然停在finalDish上
+        const containerHeight = 180;
+        const baseScrollDistance = itemHeight * 50; // 增加基础滚动距离，让滚动更长
+
+        // 关键：计算精确的停止位置
+        // 当滚动停止时，我们希望 finalIndex 对应的菜品正好在屏幕中心
+        // 滚动位置的计算：让目标菜品的索引位置对应到中心
+        const cycleLength = candidates.length * itemHeight;
+
+        // 计算多少个完整周期后，再加上目标菜品的偏移
+        const fullCycles = Math.floor(baseScrollDistance / cycleLength);
+        const remainingDistance = baseScrollDistance % cycleLength;
+
+        // 计算中心位置对应的索引
+        const visibleItems = Math.ceil(containerHeight / itemHeight) + 2;
+        const centerItemIndex = Math.floor(visibleItems / 2);
+
+        // 我们希望当滚动停止时，中心位置(centerItemIndex)显示finalIndex对应的菜品
+        // itemIndex = Math.floor(scrollPosition / itemHeight) + centerItemIndex
+        // 我们希望 itemIndex % candidates.length === finalIndex
+        // 所以 Math.floor(scrollPosition / itemHeight) + centerItemIndex ≡ finalIndex (mod candidates.length)
+        // 即 Math.floor(scrollPosition / itemHeight) ≡ finalIndex - centerItemIndex (mod candidates.length)
+
+        // 重新分析：我们需要让finalIndex对应的菜品出现在itemPosition=60px的位置
+        // itemPosition = (i * itemHeight) - (scrollPosition % itemHeight) = 60
+        // 我们需要找到哪个i值对应finalIndex，然后让这个i对应的itemPosition=60
+
+        // 当滚动停止时，我们希望某个i值满足：
+        // 1. itemIndex = Math.floor(scrollPosition / itemHeight) + i
+        // 2. itemIndex % candidates.length === finalIndex  
+        // 3. (i * itemHeight) - (scrollPosition % itemHeight) = 60
+
+        // 从条件3：i * 60 - (scrollPosition % 60) = 60
+        // 即：i = 1 + (scrollPosition % 60) / 60
+        // 为了让i是整数，我们需要scrollPosition % 60 = 0，即i = 1
+
+        // 从条件1和2：Math.floor(scrollPosition / 60) + 1 ≡ finalIndex (mod candidates.length)
+        // 即：Math.floor(scrollPosition / 60) ≡ finalIndex - 1 (mod candidates.length)
+
+        // 确保滚动距离是itemHeight的整数倍，这样菜品才能对齐
+        const targetScrollFloor = (finalIndex - 1 + candidates.length) % candidates.length;
+        const totalTargetDistance = fullCycles * cycleLength + targetScrollFloor * itemHeight;
+
+        console.log(`导演模式调试:
+            finalIndex=${finalIndex}, 
+            finalDish=${finalDish.name},
+            targetScrollFloor=${targetScrollFloor},
+            totalTargetDistance=${totalTargetDistance},
+            candidates.length=${candidates.length}`);
+
 
         const animate = () => {
             const currentTime = Date.now();
             const elapsed = currentTime - startTime;
             const timeProgress = Math.min(elapsed / totalDuration, 1);
 
-            // 使用缓动函数计算滚动速度 - 增加最大速度
-            const speedProgress = easeInQuad(timeProgress);
-            const minSpeed = 0.2;  // 最小滚动速度 - 更慢的结束速度
-            const maxSpeed = 12;   // 最大滚动速度 - 大幅增加，更震撼的视觉效果
-            const currentSpeed = maxSpeed - (maxSpeed - minSpeed) * speedProgress;
-
-            // 累计滚动距离
-            totalScrollDistance += currentSpeed;
+            // 使用基于目标距离的滚动计算
+            const distanceProgress = easeOutQuad(timeProgress);
+            scrollPosition = totalTargetDistance * distanceProgress;
 
             // 抛物线进度条：起步猛+中间快+结尾缓
-            // 使用easeOutQuad实现抛物线效果
-            const parabolicProgress = easeOutQuad(timeProgress);
-
-            // 进一步调整曲线，让起步更猛，结尾更缓
             const enhancedProgress = timeProgress < 0.1
                 ? timeProgress * 3  // 前10%时间，进度条快速到30%
-                : 0.3 + (parabolicProgress - 0.3) * 0.7 / 0.7; // 后90%时间，剩余70%进度用抛物线
+                : 0.3 + (distanceProgress - 0.3) * 0.7 / 0.7; // 后90%时间，剩余70%进度用抛物线
 
             progressBar.style.width = `${Math.min(enhancedProgress, 1) * 100}%`;
 
-            // 当速度足够慢或时间到了就结束
-            const shouldEnd = currentSpeed <= minSpeed * 1.1 || timeProgress >= 1;
-
-            // 更新滚动位置
-            scrollPosition += currentSpeed;
+            // 当时间到了就结束
+            const shouldEnd = timeProgress >= 1;
 
             // 创建连续滚动的菜品列表
             const containerHeight = 180;
@@ -286,20 +264,15 @@ class MenuGenerator {
             for (let i = 0; i < visibleItems; i++) {
                 const itemIndex = Math.floor(scrollPosition / itemHeight) + i;
 
-                // 如果接近结束，确保显示正确的最终菜品
-                let dish;
-                if (shouldEnd && i === Math.floor(visibleItems / 2)) {
-                    // 滚动结束时，中心位置显示最终选择的菜品
-                    dish = finalDish;
-                } else {
-                    // 正常滚动时，从候选列表中循环选择
-                    dish = candidates[itemIndex % candidates.length];
-                }
+                // 始终从候选列表中循环选择，让滚动看起来自然
+                const dish = candidates[itemIndex % candidates.length];
 
                 // 计算每个菜品的垂直位置
                 const itemPosition = (i * itemHeight) - (scrollPosition % itemHeight);
                 const centerPosition = containerHeight / 2;
                 const distanceFromCenter = Math.abs(itemPosition + itemHeight / 2 - centerPosition);
+
+
 
                 // 根据距离中心的位置确定样式
                 let opacity, scale, blur;
@@ -345,8 +318,29 @@ class MenuGenerator {
             if (!shouldEnd) {
                 requestAnimationFrame(animate);
             } else {
-                // 滚动结束，显示最终选中菜品的特殊效果
-                this.showFinalSelection(reel, finalDish, containerHeight, itemHeight, mode, params);
+                // 滚动自然结束，添加最终选中的特殊效果
+                // 根据调试信息，真正在中心的是i=1的元素
+                const finalElements = reel.querySelectorAll('.dish-name-slot');
+                const centerElement = finalElements[1]; // 直接使用索引1，因为调试显示i=1在中心
+                if (centerElement) {
+                    centerElement.classList.add('final-selected', 'pulsing-final');
+
+                }
+
+                // 更新文案：从"正在选择"改为"选好了"
+                const slotTitle = document.querySelector('.slot-title');
+                const slotStatus = document.querySelector('.slot-status');
+                if (slotTitle) {
+                    slotTitle.textContent = '🎉 选好了！';
+                }
+                if (slotStatus) {
+                    slotStatus.textContent = `今天就做：${finalDish.name}`;
+                }
+
+                // 显示完成消息
+                setTimeout(() => {
+                    this.showMessage(`🎰 推荐完成! 今天就做: ${finalDish.name}`, 'success');
+                }, 1000);
             }
         };
 
@@ -443,18 +437,13 @@ class MenuGenerator {
     // 显示最终结果
     displayFinalResult(dish, mode, params = []) {
         const difficultyStars = '★'.repeat(dish.difficulty) + '☆'.repeat(5 - dish.difficulty);
-        const modeText = {
-            'random': '随机推荐',
-            'ingredient': `食材筛选: ${params.join(', ')}`,
-            'choose': `指定选择: ${params.join(', ')}`
-        };
 
         document.getElementById('result-display').innerHTML = `
             <div class="dish-result final-result">
                 <div class="result-header">
                     <div class="winner-badge">🏆 推荐结果</div>
                     <h2 class="dish-name">${dish.name}</h2>
-                    <div class="mode-info"># ${modeText[mode]}</div>
+                    <div class="mode-info"># 随机推荐</div>
                 </div>
                 <div class="dish-info">
                     <div class="info-item">
@@ -480,17 +469,12 @@ class MenuGenerator {
     // 显示推荐结果（保留原方法作为备用）
     displayResult(dish, mode, params = []) {
         const difficultyStars = '★'.repeat(dish.difficulty) + '☆'.repeat(5 - dish.difficulty);
-        const modeText = {
-            'random': '随机推荐',
-            'ingredient': `食材筛选: ${params.join(', ')}`,
-            'choose': `指定选择: ${params.join(', ')}`
-        };
 
         document.getElementById('result-display').innerHTML = `
             <div class="dish-result">
                 <div class="result-header">
                     <h2 class="dish-name">${dish.name}</h2>
-                    <div class="mode-info"># ${modeText[mode]}</div>
+                    <div class="mode-info"># 随机推荐</div>
                 </div>
                 <div class="dish-info">
                     <div class="info-item">
@@ -513,42 +497,7 @@ class MenuGenerator {
         `;
     }
 
-    // 显示无结果
-    displayNoResult(mode, params) {
-        const suggestions = this.getSuggestions(mode, params);
-        document.getElementById('result-display').innerHTML = `
-            <div class="no-result">
-                <div class="error-icon">❌</div>
-                <h3>未找到匹配结果</h3>
-                <div class="suggestions">
-                    <p>建议:</p>
-                    <ul>
-                        ${suggestions.map(s => `<li>${s}</li>`).join('')}
-                    </ul>
-                </div>
-            </div>
-        `;
-    }
 
-    // 获取建议
-    getSuggestions(mode, params) {
-        if (mode === 'ingredient') {
-            const allIngredients = [...new Set(this.dishes.flatMap(dish => dish.ingredients))];
-            return [
-                `可用食材: ${allIngredients.slice(0, 10).join(', ')}...`,
-                '尝试使用更常见的食材',
-                '检查输入的食材名称是否正确'
-            ];
-        } else if (mode === 'choose') {
-            const allDishes = this.dishes.map(dish => dish.name);
-            return [
-                `可选菜品: ${allDishes.slice(0, 5).join(', ')}...`,
-                '检查菜品名称是否正确',
-                '可以输入菜品名称的一部分'
-            ];
-        }
-        return [];
-    }
 
     // 显示添加表单
     showAddForm() {
@@ -581,7 +530,7 @@ class MenuGenerator {
             return;
         }
 
-        const newDish = { name, ingredients, difficulty, time };
+        const newDish = { name, ingredients, difficulty, time, marked: false };
         this.dishes.push(newDish);
 
         this.hideAddForm();
@@ -608,10 +557,19 @@ class MenuGenerator {
         }
 
         container.innerHTML = this.dishes.map((dish, index) => `
-            <div class="dish-item">
+            <div class="dish-item ${dish.marked ? 'marked' : ''}">
                 <div class="dish-header">
-                    <h3>${dish.name}</h3>
-                    <button class="btn btn-small" onclick="menuGenerator.removeDish(${index})">删除</button>
+                    <div class="dish-title-section">
+                        <h3>${dish.name}</h3>
+                        ${dish.marked ? '<span class="director-badge">🎬</span>' : ''}
+                    </div>
+                    <div class="dish-actions">
+                        <button class="btn btn-small ${dish.marked ? 'btn-marked' : 'btn-outline'}" 
+                                onclick="menuGenerator.toggleMark(${index})">
+                            ${dish.marked ? '🌟 已标记' : '⭐ 标记'}
+                        </button>
+                        <button class="btn btn-small btn-danger" onclick="menuGenerator.removeDish(${index})">删除</button>
+                    </div>
                 </div>
                 <div class="dish-details">
                     <p><strong>食材:</strong> ${dish.ingredients.join(', ')}</p>
@@ -620,6 +578,24 @@ class MenuGenerator {
                 </div>
             </div>
         `).join('');
+    }
+
+    // 切换菜品标记状态
+    toggleMark(index) {
+        const dish = this.dishes[index];
+
+        if (!dish.marked) {
+            // 标记新菜品前，先取消其他菜品的标记（导演模式只能标记一个）
+            this.dishes.forEach(d => d.marked = false);
+            dish.marked = true;
+            this.showMessage(`🎬 已标记导演菜品: ${dish.name}`, 'success');
+        } else {
+            // 取消标记
+            dish.marked = false;
+            this.showMessage(`取消标记: ${dish.name}`, 'success');
+        }
+
+        this.renderDishList();
     }
 
     // 删除菜品
@@ -632,11 +608,7 @@ class MenuGenerator {
         }
     }
 
-    // 清空输入
-    clearInputs() {
-        document.getElementById('ingredient-input').value = '';
-        document.getElementById('choose-input').value = '';
-    }
+
 
     // 显示消息
     showMessage(message, type = 'info') {
