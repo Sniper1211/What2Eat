@@ -363,7 +363,7 @@ class MenuGenerator {
         const finalIndex = candidates.findIndex(dish => dish.name === finalDish.name);
         const prevDish = candidates[(finalIndex - 1 + candidates.length) % candidates.length];
         const nextDish = candidates[(finalIndex + 1) % candidates.length];
-        
+
         // 显示三个菜品：前、中（选中）、后，前后菜品更透明
         reel.innerHTML = `
             <!-- 前一个菜品 - 很透明 -->
@@ -394,7 +394,7 @@ class MenuGenerator {
                 align-items: center;
                 justify-content: center;
                 opacity: 1;
-                transform: scale(1.1);
+                transform: scale(1);
                 z-index: 20;
             ">
                 <div class="dish-name-slot final-selected">${finalDish.name}</div>
