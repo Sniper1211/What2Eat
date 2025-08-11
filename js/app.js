@@ -188,7 +188,7 @@ class MenuGenerator {
         resultDisplay.innerHTML = `
             <div class="slot-machine">
                 <div class="slot-header">
-                    <div class="slot-title">🎰 正在筛选中...</div>
+                    <div class="slot-title">🎰 正在选择菜品...</div>
                 </div>
                 <div class="slot-display">
                     <div class="slot-reel" id="slot-reel">
@@ -199,7 +199,7 @@ class MenuGenerator {
                     <div class="loading-bar">
                         <div class="loading-progress" id="loading-progress"></div>
                     </div>
-                    <div class="slot-status">系统正在计算最佳匹配...</div>
+                    <div class="slot-status">正在从菜单中随机选择...</div>
                 </div>
             </div>
         `;
@@ -422,6 +422,16 @@ class MenuGenerator {
         const finalElement = reel.querySelector('.final-selected');
         if (finalElement) {
             finalElement.classList.add('pulsing-final');
+        }
+
+        // 更新文案：从"正在选择"改为"选好了"
+        const slotTitle = document.querySelector('.slot-title');
+        const slotStatus = document.querySelector('.slot-status');
+        if (slotTitle) {
+            slotTitle.textContent = '🎉 选好了！';
+        }
+        if (slotStatus) {
+            slotStatus.textContent = `今天就做：${finalDish.name}`;
         }
 
         // 只显示消息，不跳转到结果页面

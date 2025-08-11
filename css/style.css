@@ -1076,10 +1076,6 @@ body {
     font-size: 2.4rem;
     font-weight: 800;
     color: #ffffff;
-    text-shadow: 
-        0 0 20px rgba(99, 179, 237, 0.8),
-        0 0 40px rgba(99, 179, 237, 0.6),
-        0 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 2px;
     white-space: nowrap;
     overflow: hidden;
