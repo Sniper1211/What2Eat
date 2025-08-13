@@ -716,7 +716,8 @@ body {
 /* Toast 消息 */
 .toast {
     position: fixed;
-    top: 70px; /* 向下移动，避免遮挡导演模式开关 */
+    top: 70px;
+    /* 向下移动，避免遮挡导演模式开关 */
     right: var(--spacing-lg);
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--border-radius);
@@ -957,7 +958,8 @@ body {
     }
 
     .toast {
-        top: 60px; /* 移动端也向下调整，避免遮挡导演模式开关 */
+        top: 60px;
+        /* 移动端也向下调整，避免遮挡导演模式开关 */
         right: var(--spacing-md);
         left: var(--spacing-md);
         transform: translateY(-100%);
@@ -1250,14 +1252,14 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.director-toggle input:checked + .toggle-slider {
+.director-toggle input:checked+.toggle-slider {
     background: var(--secondary-bg);
-    box-shadow: 
+    box-shadow:
         inset 0 2px 4px rgba(0, 0, 0, 0.1),
         0 0 15px rgba(240, 147, 251, 0.3);
 }
 
-.director-toggle input:checked + .toggle-slider::before {
+.director-toggle input:checked+.toggle-slider::before {
     transform: translateX(30px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -1281,13 +1283,13 @@ body {
 .dish-item.marked {
     border: 2px solid var(--secondary-bg);
     background: linear-gradient(135deg, rgba(240, 147, 251, 0.05), rgba(245, 87, 108, 0.05));
-    box-shadow: 
+    box-shadow:
         0 4px 12px rgba(240, 147, 251, 0.1),
         0 0 20px rgba(240, 147, 251, 0.05);
 }
 
 .dish-item.marked:hover {
-    box-shadow: 
+    box-shadow:
         0 12px 25px rgba(240, 147, 251, 0.15),
         0 0 30px rgba(240, 147, 251, 0.1);
     border-color: #f093fb;
@@ -1305,10 +1307,13 @@ body {
 }
 
 @keyframes directorPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
         transform: scale(1.1);
         opacity: 0.8;
@@ -1351,21 +1356,21 @@ body {
         gap: var(--spacing-md);
         align-items: stretch;
     }
-    
+
     .dish-title-section {
         justify-content: center;
         text-align: center;
     }
-    
+
     .dish-actions {
         justify-content: center;
     }
-    
+
     .director-toggle {
         flex-direction: column;
         gap: var(--spacing-sm);
     }
-    
+
     .toggle-label {
         order: -1;
     }
@@ -1376,7 +1381,7 @@ body {
         flex-direction: column;
         gap: var(--spacing-sm);
     }
-    
+
     .dish-actions .btn {
         width: 100%;
     }
@@ -1437,14 +1442,14 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.director-toggle-corner input:checked + .toggle-slider-corner {
+.director-toggle-corner input:checked+.toggle-slider-corner {
     background: var(--secondary-bg);
-    box-shadow: 
+    box-shadow:
         inset 0 1px 3px rgba(0, 0, 0, 0.2),
         0 0 10px rgba(240, 147, 251, 0.3);
 }
 
-.director-toggle-corner input:checked + .toggle-slider-corner::before {
+.director-toggle-corner input:checked+.toggle-slider-corner::before {
     transform: translateX(18px);
 }
 
@@ -1453,7 +1458,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.director-toggle-corner input:checked ~ .director-emoji {
+.director-toggle-corner input:checked~.director-emoji {
     transform: scale(1.1);
     filter: drop-shadow(0 0 8px rgba(240, 147, 251, 0.6));
 }
@@ -1523,14 +1528,14 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.ios-switch input:checked + .ios-slider {
+.ios-switch input:checked+.ios-slider {
     background: var(--accent-bg);
-    box-shadow: 
+    box-shadow:
         inset 0 1px 3px rgba(0, 0, 0, 0.3),
         0 0 10px rgba(79, 172, 254, 0.3);
 }
 
-.ios-switch input:checked + .ios-slider:before {
+.ios-switch input:checked+.ios-slider:before {
     transform: translateX(22px);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -1539,13 +1544,13 @@ body {
 .dish-item.marked {
     border: 2px solid var(--secondary-bg);
     background: linear-gradient(135deg, rgba(240, 147, 251, 0.05), rgba(245, 87, 108, 0.05));
-    box-shadow: 
+    box-shadow:
         0 4px 12px rgba(240, 147, 251, 0.1),
         0 0 20px rgba(240, 147, 251, 0.05);
 }
 
 .dish-item.marked:hover {
-    box-shadow: 
+    box-shadow:
         0 12px 25px rgba(240, 147, 251, 0.15),
         0 0 30px rgba(240, 147, 251, 0.1);
     border-color: #f093fb;
@@ -1563,10 +1568,13 @@ body {
 }
 
 @keyframes directorPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
         transform: scale(1.1);
         opacity: 0.8;
@@ -1608,30 +1616,30 @@ body {
         top: var(--spacing-md);
         right: var(--spacing-md);
     }
-    
+
     .function-switches {
         flex-direction: column;
         gap: var(--spacing-md);
         align-items: center;
     }
-    
+
     .switch-group {
         width: 100%;
         justify-content: space-between;
         max-width: 200px;
     }
-    
+
     .dish-header {
         flex-direction: column;
         gap: var(--spacing-md);
         align-items: stretch;
     }
-    
+
     .dish-title-section {
         justify-content: center;
         text-align: center;
     }
-    
+
     .dish-actions {
         justify-content: center;
     }
@@ -1642,33 +1650,35 @@ body {
         flex-direction: column;
         gap: var(--spacing-sm);
     }
-    
+
     .dish-actions .btn {
         width: 100%;
     }
-    
+
     .director-toggle-corner {
         padding: var(--spacing-xs) var(--spacing-sm);
     }
-    
+
     .director-emoji {
         font-size: 1rem;
     }
-    
+
     .toggle-slider-corner {
         width: 35px;
         height: 20px;
     }
-    
+
     .toggle-slider-corner::before {
         width: 16px;
         height: 16px;
     }
-    
-    .director-toggle-corner input:checked + .toggle-slider-corner::before {
+
+    .director-toggle-corner input:checked+.toggle-slider-corner::before {
         transform: translateX(15px);
     }
-}/* 右上角导
+}
+
+/* 右上角导
 演模式 - 滑动开关 */
 .director-mode-corner {
     position: fixed;
@@ -1726,14 +1736,14 @@ body {
 }
 
 /* 开启状态 */
-.director-toggle-corner input:checked + .toggle-slider-corner {
+.director-toggle-corner input:checked+.toggle-slider-corner {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    box-shadow: 
+    box-shadow:
         inset 0 2px 4px rgba(0, 0, 0, 0.1),
         0 0 15px rgba(240, 147, 251, 0.4);
 }
 
-.director-toggle-corner input:checked + .toggle-slider-corner::before {
+.director-toggle-corner input:checked+.toggle-slider-corner::before {
     transform: translateX(24px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -1743,7 +1753,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.director-toggle-corner input:checked ~ .director-emoji {
+.director-toggle-corner input:checked~.director-emoji {
     transform: scale(1.1);
     filter: drop-shadow(0 0 8px rgba(240, 147, 251, 0.6));
 }
@@ -1754,27 +1764,337 @@ body {
         top: 15px;
         right: 15px;
     }
-    
+
     .director-toggle-corner {
         padding: 6px 12px;
         gap: 8px;
     }
-    
+
     .toggle-slider-corner {
         width: 40px;
         height: 22px;
     }
-    
+
     .toggle-slider-corner::before {
         width: 18px;
         height: 18px;
     }
-    
-    .director-toggle-corner input:checked + .toggle-slider-corner::before {
+
+    .director-toggle-corner input:checked+.toggle-slider-corner::before {
         transform: translateX(18px);
     }
-    
+
     .director-emoji {
         font-size: 16px;
+    }
+}/* 主题
+切换按钮 */
+.theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(103, 126, 234, 0.3);
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-color: var(--secondary-bg);
+}
+
+.theme-icon {
+    font-size: 1.1rem;
+}
+
+/* 像素极简主题 */
+body.pixel-theme {
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+    background: #0a0a0a;
+    color: #00ff00;
+}
+
+body.pixel-theme * {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+/* 像素主题 - 容器 */
+body.pixel-theme .container {
+    background: none;
+}
+
+body.pixel-theme .main {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    box-shadow: none;
+}
+
+/* 像素主题 - 标题 */
+body.pixel-theme .title {
+    color: #00ff00;
+    text-shadow: 2px 2px 0px #008800;
+    background: none;
+    -webkit-text-fill-color: #00ff00;
+}
+
+body.pixel-theme .subtitle {
+    color: #00aa00;
+}
+
+/* 像素主题 - 按钮 */
+body.pixel-theme .btn {
+    background: #1a1a1a;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body.pixel-theme .btn:hover {
+    background: #00ff00;
+    color: #000000;
+    transform: none;
+}
+
+body.pixel-theme .btn-primary {
+    background: #003300;
+    border-color: #00ff00;
+}
+
+body.pixel-theme .btn-primary:hover {
+    background: #00ff00;
+    color: #000000;
+}
+
+body.pixel-theme .btn-outline {
+    background: transparent;
+    border-color: #00aa00;
+    color: #00aa00;
+}
+
+body.pixel-theme .btn-outline:hover {
+    background: #00aa00;
+    color: #000000;
+}
+
+/* 像素主题 - 老虎机 */
+body.pixel-theme .result-card {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+}
+
+body.pixel-theme .slot-machine {
+    background: #0a0a0a;
+    border: 2px solid #00ff00;
+}
+
+body.pixel-theme .slot-display {
+    background: #000000;
+    border: 2px solid #00ff00;
+}
+
+body.pixel-theme .slot-title {
+    color: #00ff00;
+    text-shadow: 1px 1px 0px #008800;
+    animation: pixelBlink 1s infinite;
+}
+
+body.pixel-theme .dish-name-slot {
+    color: #00ff00;
+    text-shadow: 1px 1px 0px #008800;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+body.pixel-theme .loading-bar {
+    background: #000000;
+    border: 1px solid #00ff00;
+}
+
+body.pixel-theme .loading-progress {
+    background: #00ff00;
+    animation: none;
+}
+
+body.pixel-theme .slot-status {
+    color: #00aa00;
+    background: transparent;
+    border: 1px solid #00aa00;
+}
+
+/* 像素主题 - 菜品管理 */
+body.pixel-theme .dish-list-section {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+}
+
+body.pixel-theme .dish-item {
+    background: #0a0a0a;
+    border: 1px solid #00aa00;
+}
+
+body.pixel-theme .dish-item:hover {
+    background: #003300;
+    transform: none;
+}
+
+body.pixel-theme .dish-item.marked {
+    border-color: #00ff00;
+    background: #002200;
+}
+
+body.pixel-theme .dish-header h3 {
+    color: #00ff00;
+}
+
+body.pixel-theme .dish-details {
+    color: #00aa00;
+}
+
+body.pixel-theme .dish-details strong {
+    color: #00ff00;
+}
+
+/* 像素主题 - 模态框 */
+body.pixel-theme .modal-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: none;
+}
+
+body.pixel-theme .modal {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+}
+
+body.pixel-theme .modal-header {
+    border-bottom: 1px solid #00aa00;
+}
+
+body.pixel-theme .modal-header h3 {
+    color: #00ff00;
+}
+
+body.pixel-theme .form-group label {
+    color: #00ff00;
+}
+
+body.pixel-theme .form-group input,
+body.pixel-theme .form-group select {
+    background: #0a0a0a;
+    border: 1px solid #00aa00;
+    color: #00ff00;
+}
+
+body.pixel-theme .form-group input:focus,
+body.pixel-theme .form-group select:focus {
+    border-color: #00ff00;
+    box-shadow: none;
+}
+
+/* 像素主题 - 导演模式开关 */
+body.pixel-theme .director-toggle-corner {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+}
+
+body.pixel-theme .toggle-slider-corner {
+    background: #0a0a0a;
+    border: 1px solid #00aa00;
+}
+
+body.pixel-theme .director-toggle-corner input:checked + .toggle-slider-corner {
+    background: #00ff00;
+}
+
+body.pixel-theme .director-toggle-corner input:checked + .toggle-slider-corner::before {
+    background: #000000;
+}
+
+body.pixel-theme .director-emoji {
+    filter: none;
+}
+
+/* 像素主题 - Toast */
+body.pixel-theme .toast {
+    background: #1a1a1a !important;
+    border: 2px solid #00ff00 !important;
+    color: #00ff00 !important;
+    backdrop-filter: none;
+}
+
+/* 像素主题 - 主题切换按钮 */
+body.pixel-theme .theme-btn {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    backdrop-filter: none;
+}
+
+body.pixel-theme .theme-btn:hover {
+    background: #00ff00;
+    color: #000000;
+    transform: none;
+}
+
+/* 像素主题动画 */
+@keyframes pixelBlink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0.7;
+    }
+}
+
+/* 像素主题 - 最终选中效果 */
+body.pixel-theme .final-selected.pulsing-final {
+    animation: pixelPulse 0.5s infinite;
+}
+
+@keyframes pixelPulse {
+    0% {
+        color: #00ff00;
+        text-shadow: 1px 1px 0px #008800;
+    }
+    50% {
+        color: #ffffff;
+        text-shadow: 1px 1px 0px #00ff00;
+    }
+    100% {
+        color: #00ff00;
+        text-shadow: 1px 1px 0px #008800;
+    }
+}
+
+/* 响应式 - 主题切换按钮 */
+@media (max-width: 768px) {
+    .theme-switcher {
+        bottom: 15px;
+    }
+    
+    .theme-btn {
+        padding: 10px 16px;
+        font-size: 0.8rem;
     }
 }
