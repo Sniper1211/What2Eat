@@ -4,14 +4,12 @@ class MenuGenerator {
         this.dishes = [];
         this.currentMode = null;
         this.directorMode = false; // 导演模式状态
-        this.pixelTheme = false; // 像素主题状态
         this.init();
     }
 
     init() {
         this.loadDefaultDishes();
         this.bindEvents();
-        this.loadThemeSettings(); // 加载主题设置
         this.showMessage('系统初始化完成 ✓', 'success');
     }
 
@@ -87,9 +85,6 @@ class MenuGenerator {
 
         // 列表相关
         document.getElementById('close-list-btn').addEventListener('click', () => this.hideDishList());
-
-        // 主题切换
-        document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
     }
 
     // 随机推荐 - 添加滚动效果
@@ -615,43 +610,7 @@ class MenuGenerator {
 
 
 
-    // 切换主题
-    toggleTheme() {
-        this.pixelTheme = !this.pixelTheme;
-        const body = document.body;
-        const themeBtn = document.getElementById('theme-toggle');
-        const themeText = themeBtn.querySelector('.theme-text');
-        const themeIcon = themeBtn.querySelector('.theme-icon');
 
-        if (this.pixelTheme) {
-            body.classList.add('pixel-theme');
-            themeText.textContent = '现代风格';
-            themeIcon.textContent = '💎';
-            this.showMessage('🎮 已切换到像素极简主题', 'success');
-        } else {
-            body.classList.remove('pixel-theme');
-            themeText.textContent = '像素极简';
-            themeIcon.textContent = '🎨';
-            this.showMessage('✨ 已切换到现代风格主题', 'success');
-        }
-
-        // 保存主题设置到本地存储
-        localStorage.setItem('pixelTheme', this.pixelTheme);
-    }
-
-    // 加载主题设置
-    loadThemeSettings() {
-        const savedTheme = localStorage.getItem('pixelTheme');
-        if (savedTheme === 'true') {
-            this.pixelTheme = true;
-            document.body.classList.add('pixel-theme');
-            const themeBtn = document.getElementById('theme-toggle');
-            const themeText = themeBtn.querySelector('.theme-text');
-            const themeIcon = themeBtn.querySelector('.theme-icon');
-            themeText.textContent = '现代风格';
-            themeIcon.textContent = '💎';
-        }
-    }
 
     // 显示消息
     showMessage(message, type = 'info') {
